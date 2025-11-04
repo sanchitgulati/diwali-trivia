@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Diwali Trivia Party</title>
+  <style>
+    :root{
+      --bg1:#1b0f2e; --bg2:#0b2c33; --fg:#fff7e6; --accent:#ffb000; --accent2:#c77dff; --accent3:#00dbc2; --danger:#ff4d6d; --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,Noto Sans,"Apple Color Emoji","Segoe UI Emoji";background:radial-gradient(1200px 800px at 20% 0%,var(--bg2),transparent),radial-gradient(1000px 700px at 80% 100%,#1a1935,transparent),linear-gradient(135deg,var(--bg1),#140a22 60%);color:var(--fg);display:grid;place-items:center;overflow:hidden;}
+    .wrap{width:min(1600px,95vw);height:min(95vh,900px);position:relative;}
+    .card{position:absolute;inset:0;display:grid;grid-template-rows:auto 1fr auto;gap:1.2rem;background:rgba(255,255,255,0.03);border:6px solid #fff2;border-radius:28px;padding:clamp(16px,3vw,36px);box-shadow:var(--shadow);backdrop-filter:blur(6px);}
+    header{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+    .title{display:flex;align-items:center;gap:.6rem;font-weight:900;letter-spacing:.5px;}
+    .title .logo{font-size:clamp(24px,4vw,40px);} .title .text{font-size:clamp(20px,2.6vw,34px);} .subtle{opacity:.8;font-size:clamp(12px,1.5vw,16px)}
+    .qa{display:grid;align-content:center;text-align:center;padding:clamp(8px,2vw,16px);} .q{font-weight:800;line-height:1.15;font-size:clamp(28px,5.2vw,66px);text-wrap:balance;} .a{margin-top:clamp(10px,2vh,20px);font-weight:700;line-height:1.2;font-size:clamp(24px,4.6vw,54px);color:var(--accent);text-shadow:0 2px 0 #0006;display:none;} .a.show{display:block;animation:pop .25s ease-out;} @keyframes pop{from{transform:scale(.98);opacity:.3}}
+    footer{display:flex;align-items:center;justify-content:space-between;gap:1rem;} .controls{display:flex;flex-wrap:wrap;gap:.5rem;} button.ctrl{font-size:clamp(14px,1.6vw,18px);font-weight:700;color:#0b0814;background:linear-gradient(180deg,var(--accent),#ff9d00);border:none;border-radius:14px;padding:.6em .9em;cursor:pointer;box-shadow:var(--shadow);} button.ctrl.secondary{background:linear-gradient(180deg,#ffe8b5,#ffd270);} button.ctrl.ghost{background:#ffffff10;color:var(--fg);border:2px solid #ffffff30;} button.ctrl:active{transform:translateY(1px);} .idx{font-weight:700;opacity:.9;}
+    .tips{display:none;}
+    .lanterns{position:absolute;inset:0;pointer-events:none;overflow:hidden;} .lantern{position:absolute;font-size:clamp(20px,3.2vw,40px);opacity:.7;filter:drop-shadow(0 4px 6px #0008);animation:float 9s ease-in-out infinite;} @keyframes float{0%{transform:translateY(20px)}50%{transform:translateY(-10px)}100%{transform:translateY(20px)}}
+    .hidden{display:none!important;} .pill{padding:.25em .6em;border-radius:999px;background:#ffffff22;}
+    .modal{position:fixed;inset:0;display:none;place-items:center;background:#000a;z-index:10;} .modal .box{width:min(1200px,92vw);max-height:90vh;overflow:auto;background:#111a;border:2px solid #fff3;padding:1rem;border-radius:18px;} .modal textarea{width:100%;height:50vh;font:14px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#fff;background:#000;border:1px solid #444;border-radius:12px;padding:10px;} .modal .row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem}
+    ::-webkit-scrollbar{width:10px;height:10px} ::-webkit-scrollbar-thumb{background:#ffffff33;border-radius:10px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <header>
+        <div class="title"><div class="logo">🪔</div><div class="text">Diwali Trivia Party</div></div>
+        <div class="subtle">Use <span class="pill">Space</span> to reveal • <span class="pill">←/→</span> to navigate • <span class="pill">F</span> fullscreen</div>
+      </header>
+      <main class="qa" role="main" aria-live="polite"><div class="q" id="q">Loading…</div><div class="a" id="a"></div></main>
+      <footer>
+        <div class="controls">
+          <button class="ctrl ghost" id="prev">◀ Prev</button>
+          <button class="ctrl" id="reveal">🎇 Reveal</button>
+          <button class="ctrl ghost" id="next">Next ▶</button>
+          <button class="ctrl secondary" id="shuffle">🔀 Shuffle</button>
+          <button class="ctrl ghost" id="autoplay">▶︎ Auto</button>
+          <button class="ctrl ghost" id="fs">⛶ Fullscreen</button>
+          <!-- <button class="ctrl ghost" id="importBtn">⬇ Import</button>
+          <button class="ctrl ghost" id="exportBtn">⬆ Export</button>
+          <button class="ctrl ghost" id="helpBtn">ⓘ Help</button> -->
+        </div>
+        <div class="idx" id="idx">1 / 1</div>
+      </footer>
+      <div class="lanterns" aria-hidden="true"></div>
+      <div class="tips"></div>
+    </div>
+  </div>
+  <div class="modal" id="modal"><div class="box"><h2 style="margin:0 0 .5rem 0">Edit Questions (JSON)</h2><p style="margin:.2rem 0 .8rem 0;opacity:.9">Paste an array of objects like <code>{"q":"Question","a":"Answer"}</code>. Your list is saved to <b>localStorage</b> only on this device.</p><textarea id="jsonArea"></textarea><div class="row"><button class="ctrl" id="saveJson">💾 Save</button><button class="ctrl ghost" id="closeJson">Close</button><input type="file" accept="application/json" id="fileInput" class="hidden" /><button class="ctrl secondary" id="loadFile">📁 Load .json file</button></div></div></div>
+  <script>
+    const DEFAULT_QA=[{q:"What does Diwali primarily celebrate?",a:"The victory of light over darkness and good over evil."},{q:"Which Hindu god returns to Ayodhya at the end of the Ramayana, a story linked with Diwali?",a:"Lord Rama."},{q:"What is the small clay lamp lit during Diwali called?",a:"A diya."}];
+    const LS_KEY='diwali_trivia_qa_v1';const LS_IDX='diwali_trivia_idx_v1';const LS_ORDER='diwali_trivia_order_v1';const LS_AUTOPLAY='diwali_trivia_autoplay_v1';
+    let qa=loadQA();let order=[...Array(qa.length).keys()];let idx=0;let showAnswer=false;let autoplay=false;let intervalMs=12000;let timer=null;
+    const qEl=document.getElementById('q');const aEl=document.getElementById('a');const idxEl=document.getElementById('idx');const btnPrev=document.getElementById('prev');const btnNext=document.getElementById('next');const btnReveal=document.getElementById('reveal');const btnShuffle=document.getElementById('shuffle');const btnAuto=document.getElementById('autoplay');const btnFS=document.getElementById('fs');const btnImport=document.getElementById('importBtn');const btnExport=document.getElementById('exportBtn');const btnHelp=document.getElementById('helpBtn');const modal=document.getElementById('modal');const jsonArea=document.getElementById('jsonArea');const btnSaveJson=document.getElementById('saveJson');const btnCloseJson=document.getElementById('closeJson');const fileInput=document.getElementById('fileInput');const btnLoadFile=document.getElementById('loadFile');
+    placeLanterns();render();updateAutoplay();
+    btnPrev.onclick=prev;btnNext.onclick=next;btnReveal.onclick=toggleAnswer;btnShuffle.onclick=shuffleAll;btnAuto.onclick=toggleAutoplay;btnFS.onclick=toggleFullscreen;btnImport.onclick=openEditor;btnExport.onclick=exportJson;btnHelp.onclick=showHelp;btnSaveJson.onclick=saveJson;btnCloseJson.onclick=closeEditor;btnLoadFile.onclick=()=>fileInput.click();fileInput.onchange=onFileImport;
+    window.onkeydown=e=>{const k=e.key.toLowerCase();if(['arrowright','enter'].includes(k)){e.preventDefault();if(!showAnswer)toggleAnswer();else next();}if(k===' '){e.preventDefault();toggleAnswer();}if(['arrowleft','backspace'].includes(k)){e.preventDefault();prev();}if(k==='r'){shuffleAll();}if(k==='a'){toggleAutoplay();}if(k==='f'){toggleFullscreen();}if(k==='i'){openEditor();}if(k==='+'){intervalMs=Math.max(4000,intervalMs-1000);updateAutoplay(true);}if(k==='-'){intervalMs=Math.min(30000,intervalMs+1000);updateAutoplay(true);}if(k==='h'){showHelp();}};
+    document.querySelector('.qa').onclick=toggleAnswer;
+    function render(){const i=order[idx];const item=qa[i];qEl.textContent=item.q;aEl.textContent=item.a||'';aEl.classList.toggle('show',showAnswer);idxEl.textContent=`${idx+1} / ${qa.length}`;localStorage.setItem(LS_IDX,String(idx));}
+    function next(){showAnswer=false;idx=(idx+1)%qa.length;render();resetAutoplayTick();}
+    function prev(){showAnswer=false;idx=(idx-1+qa.length)%qa.length;render();resetAutoplayTick();}
+    function toggleAnswer(){showAnswer=!showAnswer;aEl.classList.toggle('show',showAnswer);resetAutoplayTick();}
+    function shuffleAll(){order=shuffle([...Array(qa.length).keys()]);idx=0;showAnswer=false;render();}
+    function toggleAutoplay(){autoplay=!autoplay;localStorage.setItem(LS_AUTOPLAY,autoplay?'1':'0');updateAutoplay();}
+    function updateAutoplay(bump){btnAuto.textContent=autoplay?`⏸ Auto (${Math.round(intervalMs/1000)}s)`:'▶︎ Auto';if(autoplay){clearInterval(timer);timer=setInterval(()=>{if(!showAnswer){toggleAnswer();}else{next();}},intervalMs);}else{clearInterval(timer);timer=null;}}
+    function resetAutoplayTick(){if(autoplay){updateAutoplay(true);}}
+    function toggleFullscreen(){const el=document.documentElement;if(!document.fullscreenElement){el.requestFullscreen?.();}else{document.exitFullscreen?.();}}
+    function openEditor(){jsonArea.value=JSON.stringify(qa,null,2);modal.style.display='grid';}
+    function closeEditor(){modal.style.display='none';}
+    function saveJson(){try{const parsed=JSON.parse(jsonArea.value);if(!Array.isArray(parsed))throw new Error('JSON must be an array');const cleaned=parsed.map(o=>({q:String(o.q||'').trim(),a:String(o.a||'').trim()})).filter(o=>o.q);if(cleaned.length===0)throw new Error('No valid items. Include objects with {q, a}.');qa=cleaned;order=[...Array(qa.length).keys()];idx=0;showAnswer=false;localStorage.setItem(LS_KEY,JSON.stringify(qa));render();closeEditor();}catch(err){alert('Invalid JSON: '+err.message);}}
+    function exportJson(){const blob=new Blob([JSON.stringify(qa,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='diwali-trivia-qa.json';a.click();URL.revokeObjectURL(url);}
+    function onFileImport(e){const file=e.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{jsonArea.value=String(reader.result||'');};reader.readAsText(file);}
+    function loadQA(){try{const raw=localStorage.getItem(LS_KEY);if(raw){const arr=JSON.parse(raw);if(Array.isArray(arr)&&arr.length)return arr;}}catch{}return DEFAULT_QA;}
+    function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
+    function placeLanterns(){const L=document.querySelector('.lanterns');const icons=['🪔','🎇','🧨','✨','🎆'];for(let i=0;i<10;i++){const span=document.createElement('span');span.className='lantern';span.textContent=icons[i%icons.length];span.style.left=Math.random()*96+2+'%';span.style.top=Math.random()*80+10+'%';span.style.animationDelay=(Math.random()*6)+'s';L.appendChild(span);}}
+    function showHelp(){alert(`Controls:\n\nSpace / Click  — Reveal/Hide answer\n→ / Enter       — Reveal then Next\n← / Backspace   — Previous\nR               — Shuffle order\nA               — Toggle Auto-play\n+ / -           — Auto speed ±1s (4–30s)\nF               — Fullscreen\nI               — Import / Edit JSON\nH               — This help`);}
+  </script>
+</body>
+</html>
