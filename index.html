@@ -6,17 +6,29 @@
   <title>Diwali Trivia Party</title>
   <style>
     :root{
-      --bg1:#1b0f2e; --bg2:#0b2c33; --fg:#fff7e6; --accent:#ffb000; --accent2:#c77dff; --accent3:#00dbc2; --danger:#ff4d6d; --shadow:0 10px 30px rgba(0,0,0,.35);
+      --bg1:#6b1a6b; --bg2:#c92e7d; --fg:#fff7e6; --accent:#ffd000; --accent2:#ff4db8; --accent3:#00d9c8; --danger:#ff4d6d; --shadow:0 10px 30px rgba(0,0,0,.35);
     }
-    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,Noto Sans,"Apple Color Emoji","Segoe UI Emoji";background:radial-gradient(1200px 800px at 20% 0%,var(--bg2),transparent),radial-gradient(1000px 700px at 80% 100%,#1a1935,transparent),linear-gradient(135deg,var(--bg1),#140a22 60%);color:var(--fg);display:grid;place-items:center;overflow:hidden;position:relative;}
-    html::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 50%, rgba(255,176,0,0.03) 0%, transparent 50%),radial-gradient(circle at 80% 20%, rgba(199,125,255,0.04) 0%, transparent 50%),radial-gradient(circle at 50% 80%, rgba(0,219,194,0.03) 0%, transparent 50%);animation:shimmer 20s ease-in-out infinite;pointer-events:none;z-index:0;}
+    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,Noto Sans,"Apple Color Emoji","Segoe UI Emoji";background:radial-gradient(1200px 800px at 20% 0%,var(--bg2),transparent),radial-gradient(1000px 700px at 80% 100%,#8b2c8b,transparent),linear-gradient(135deg,var(--bg1),#4a0e4a 60%);color:var(--fg);display:grid;place-items:center;overflow:hidden;position:relative;}
+    html::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 50%, rgba(255,208,0,0.05) 0%, transparent 50%),radial-gradient(circle at 80% 20%, rgba(255,77,184,0.06) 0%, transparent 50%),radial-gradient(circle at 50% 80%, rgba(0,217,200,0.05) 0%, transparent 50%);animation:shimmer 20s ease-in-out infinite;pointer-events:none;z-index:0;}
     @keyframes shimmer{0%,100%{opacity:0.3;transform:scale(1) rotate(0deg);}50%{opacity:0.6;transform:scale(1.1) rotate(2deg);}}
     .wrap{width:min(1600px,95vw);height:min(95vh,900px);position:relative;z-index:1;}
-    .card{position:absolute;inset:0;display:grid;grid-template-rows:auto 1fr auto;gap:1.2rem;background:rgba(255,255,255,0.03);border:6px solid #fff2;border-radius:28px;padding:clamp(16px,3vw,36px);box-shadow:var(--shadow);backdrop-filter:blur(6px);}
+    .card{position:absolute;inset:0;display:grid;grid-template-rows:auto 1fr auto;gap:1.2rem;background:rgba(255,255,255,0.05);border:6px solid rgba(255,208,0,0.2);border-radius:28px;padding:clamp(16px,3vw,36px);box-shadow:var(--shadow);backdrop-filter:blur(6px);}
     header{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
     .title{display:flex;align-items:center;gap:.6rem;font-weight:900;letter-spacing:.5px;}
     .title .logo{font-size:clamp(24px,4vw,40px);} .title .text{font-size:clamp(20px,2.6vw,34px);} .subtle{opacity:.8;font-size:clamp(12px,1.5vw,16px)}
     .qa{display:grid;align-content:center;text-align:center;padding:clamp(8px,2vw,16px);} 
+    .intro-view{display:none;} .intro-view.show{display:block;animation:fadeIn .5s ease-out;}
+    .intro-content{max-width:700px;margin:0 auto;padding:clamp(16px,3vw,32px);}
+    .intro-emoji{font-size:clamp(48px,8vw,80px);margin-bottom:clamp(16px,2vh,24px);}
+    .intro-title{font-size:clamp(36px,6vw,64px);font-weight:900;line-height:1.1;margin:0 0 clamp(12px,2vh,20px) 0;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .intro-text{font-size:clamp(18px,2.5vw,26px);margin:0 0 clamp(24px,4vh,40px) 0;opacity:0.95;}
+    .intro-instructions{text-align:left;background:rgba(255,255,255,0.05);border:2px solid rgba(255,208,0,0.15);border-radius:16px;padding:clamp(16px,2vw,24px);margin-bottom:clamp(24px,4vh,40px);}
+    .intro-instructions p{margin:0 0 clamp(8px,1.5vh,12px) 0;font-size:clamp(16px,2vw,20px);font-weight:700;color:var(--accent);}
+    .intro-instructions ul{margin:0;padding-left:clamp(20px,3vw,28px);list-style:none;}
+    .intro-instructions li{margin-bottom:clamp(6px,1vh,10px);font-size:clamp(14px,1.8vw,18px);line-height:1.5;position:relative;padding-left:clamp(16px,2vw,20px);}
+    .intro-instructions li::before{content:'✓';position:absolute;left:0;color:var(--accent3);font-weight:bold;}
+    .ctrl-large{font-size:clamp(18px,2.2vw,24px)!important;padding:0.8em 1.5em!important;margin-top:clamp(8px,1.5vh,16px);}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
     .question-view{display:block;} .question-view.hidden{display:none!important;}
     .answer-view{display:none;text-align:left;} .answer-view.show{display:block!important;animation:slideIn .3s ease-out;}
     .q{font-weight:800;line-height:1.15;font-size:clamp(28px,5.2vw,66px);text-wrap:balance;} 
@@ -41,6 +53,14 @@
         <div class="subtle">Use <span class="pill">Space</span> to reveal • <span class="pill">←/→</span> to navigate • <span class="pill">F</span> fullscreen</div>
       </header>
       <main class="qa" role="main" aria-live="polite">
+        <div class="intro-view" id="introView">
+          <div class="intro-content">
+            <div class="intro-emoji">🪔✨</div>
+            <h1 class="intro-title">Welcome to Diwali Trivia!</h1>
+            
+            <button class="ctrl ctrl-large" id="startBtn">🎉 Start Quiz</button>
+          </div>
+        </div>
         <div class="question-view" id="questionView">
           <div class="q" id="q">Loading…</div>
         </div>
@@ -106,15 +126,20 @@
         }
       ]
     };
-    const LS_KEY='diwali_trivia_qa_v1';const LS_IDX='diwali_trivia_idx_v1';const LS_ORDER='diwali_trivia_order_v1';const LS_AUTOPLAY='diwali_trivia_autoplay_v1';
-    let qaData=loadQA();let qa=flattenQA(qaData);let order=[...Array(qa.length).keys()];let idx=0;let showAnswer=false;let autoplay=false;let intervalMs=12000;let timer=null;
+    const LS_KEY='diwali_trivia_qa_v1';const LS_IDX='diwali_trivia_idx_v1';const LS_ORDER='diwali_trivia_order_v1';const LS_AUTOPLAY='diwali_trivia_autoplay_v1';const LS_INTRO='diwali_trivia_intro_seen_v1';
+    let qaData=loadQA();let qa=flattenQA(qaData);let order=[...Array(qa.length).keys()];let idx=0;let showAnswer=false;let autoplay=false;let intervalMs=12000;let timer=null;let quizStarted=false;
     const qEl=document.getElementById('q');const idxEl=document.getElementById('idx');
+    const introView=document.getElementById('introView');const startBtn=document.getElementById('startBtn');
     const questionView=document.getElementById('questionView');const answerView=document.getElementById('answerView');const answerTitle=document.getElementById('answerTitle');const answerFacts=document.getElementById('answerFacts');
     const btnPrev=document.getElementById('prev');const btnNext=document.getElementById('next');const btnReveal=document.getElementById('reveal');const btnShuffle=document.getElementById('shuffle');const btnAuto=document.getElementById('autoplay');const btnFS=document.getElementById('fs');const btnImport=document.getElementById('importBtn');const btnExport=document.getElementById('exportBtn');const btnHelp=document.getElementById('helpBtn');const modal=document.getElementById('modal');const jsonArea=document.getElementById('jsonArea');const btnSaveJson=document.getElementById('saveJson');const btnCloseJson=document.getElementById('closeJson');const fileInput=document.getElementById('fileInput');const btnLoadFile=document.getElementById('loadFile');
-    render();updateAutoplay();
+    checkIntro();
+    startBtn.onclick=startQuiz;
     btnPrev.onclick=prev;btnNext.onclick=next;btnReveal.onclick=toggleAnswer;btnShuffle.onclick=shuffleAll;btnAuto.onclick=toggleAutoplay;btnFS.onclick=toggleFullscreen;btnImport.onclick=openEditor;btnExport.onclick=exportJson;btnHelp.onclick=showHelp;btnSaveJson.onclick=saveJson;btnCloseJson.onclick=closeEditor;btnLoadFile.onclick=()=>fileInput.click();fileInput.onchange=onFileImport;
-    window.onkeydown=e=>{const k=e.key.toLowerCase();if(['arrowright','enter'].includes(k)){e.preventDefault();if(!showAnswer)toggleAnswer();else next();}if(k===' '){e.preventDefault();toggleAnswer();}if(['arrowleft','backspace'].includes(k)){e.preventDefault();prev();}if(k==='r'){shuffleAll();}if(k==='a'){toggleAutoplay();}if(k==='f'){toggleFullscreen();}if(k==='i'){openEditor();}if(k==='+'){intervalMs=Math.max(4000,intervalMs-1000);updateAutoplay(true);}if(k==='-'){intervalMs=Math.min(30000,intervalMs+1000);updateAutoplay(true);}if(k==='h'){showHelp();}};
-    document.querySelector('.qa').onclick=toggleAnswer;
+    window.onkeydown=e=>{if(!quizStarted&&e.key.toLowerCase()==='enter'){e.preventDefault();startQuiz();return;}if(!quizStarted)return;const k=e.key.toLowerCase();if(['arrowright','enter'].includes(k)){e.preventDefault();if(!showAnswer)toggleAnswer();else next();}if(k===' '){e.preventDefault();toggleAnswer();}if(['arrowleft','backspace'].includes(k)){e.preventDefault();prev();}if(k==='r'){shuffleAll();}if(k==='a'){toggleAutoplay();}if(k==='f'){toggleFullscreen();}if(k==='i'){openEditor();}if(k==='+'){intervalMs=Math.max(4000,intervalMs-1000);updateAutoplay(true);}if(k==='-'){intervalMs=Math.min(30000,intervalMs+1000);updateAutoplay(true);}if(k==='h'){showHelp();}};
+    document.querySelector('.qa').onclick=e=>{if(quizStarted&&(e.target.closest('.question-view')||e.target.closest('.answer-view'))){toggleAnswer();}};
+    function checkIntro(){const introSeen=localStorage.getItem(LS_INTRO);if(!introSeen){showIntro();}else{startQuiz();}}
+    function showIntro(){quizStarted=false;introView.classList.add('show');questionView.classList.add('hidden');answerView.classList.remove('show');}
+    function startQuiz(){quizStarted=true;localStorage.setItem(LS_INTRO,'1');introView.classList.remove('show');questionView.classList.remove('hidden');render();updateAutoplay();}
     function flattenQA(qaData){const flat=[];Object.keys(qaData).forEach(category=>{qaData[category].forEach(item=>{flat.push({...item,category});});});return flat;}
     function render(){const i=order[idx];const item=qa[i];qEl.innerHTML=`<div style="color:var(--accent2);font-size:0.6em;margin-bottom:0.5em;opacity:0.9;font-weight:600;">${item.category}</div>${item.q}`;answerTitle.textContent=item.a||'';answerFacts.innerHTML=item.facts||'<p>No additional facts available.</p>';if(showAnswer){questionView.classList.add('hidden');answerView.classList.add('show');btnReveal.textContent='🔙 Back to Question';}else{questionView.classList.remove('hidden');answerView.classList.remove('show');btnReveal.textContent='🎇 Show Answer';}idxEl.textContent=`${idx+1} / ${qa.length}`;localStorage.setItem(LS_IDX,String(idx));}
     function next(){showAnswer=false;idx=(idx+1)%qa.length;render();resetAutoplayTick();}
