@@ -30,6 +30,7 @@
     .ctrl-large{font-size:clamp(18px,2.2vw,24px)!important;padding:0.8em 1.5em!important;margin-top:clamp(8px,1.5vh,16px);}
     @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
     .question-view{display:block;} .question-view.hidden{display:none!important;}
+    .question-image{max-width:100%;max-height:50vh;margin:clamp(16px,3vh,24px) auto;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.3);display:block;object-fit:contain;}
     .answer-view{display:none;text-align:left;} .answer-view.show{display:block!important;animation:slideIn .3s ease-out;}
     .q{font-weight:800;line-height:1.15;font-size:clamp(28px,5.2vw,66px);text-wrap:balance;} 
     .answer-title{font-weight:800;line-height:1.2;font-size:clamp(32px,5vw,56px);color:var(--accent);text-shadow:0 2px 0 #0006;margin-bottom:clamp(16px,3vh,24px);text-align:center;}
@@ -38,7 +39,7 @@
     .answer-facts ul{margin:clamp(8px,1.5vh,12px) 0;padding-left:clamp(16px,3vw,24px);}
     .answer-facts li{margin-bottom:clamp(6px,1vh,10px);}
     @keyframes slideIn{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
-    footer{display:flex;align-items:center;justify-content:space-between;gap:1rem;} .controls{display:flex;flex-wrap:wrap;gap:.5rem;} button.ctrl{font-size:clamp(14px,1.6vw,18px);font-weight:700;color:#0b0814;background:linear-gradient(180deg,var(--accent),#ff9d00);border:none;border-radius:14px;padding:.6em .9em;cursor:pointer;box-shadow:var(--shadow);} button.ctrl.secondary{background:linear-gradient(180deg,#ffe8b5,#ffd270);} button.ctrl.ghost{background:#ffffff10;color:var(--fg);border:2px solid #ffffff30;} button.ctrl:active{transform:translateY(1px);} .idx{font-weight:700;opacity:.9;}
+    footer{display:flex;align-items:center;justify-content:space-between;gap:1rem;} footer.hidden{display:none!important;} .controls{display:flex;flex-wrap:wrap;gap:.5rem;} button.ctrl{font-size:clamp(14px,1.6vw,18px);font-weight:700;color:#0b0814;background:linear-gradient(180deg,var(--accent),#ff9d00);border:none;border-radius:14px;padding:.6em .9em;cursor:pointer;box-shadow:var(--shadow);} button.ctrl.secondary{background:linear-gradient(180deg,#ffe8b5,#ffd270);} button.ctrl.ghost{background:#ffffff10;color:var(--fg);border:2px solid #ffffff30;} button.ctrl:active{transform:translateY(1px);} .idx{font-weight:700;opacity:.9;}
     .tips{display:none;}
     .hidden{display:none!important;} .pill{padding:.25em .6em;border-radius:999px;background:#ffffff22;}
     .modal{position:fixed;inset:0;display:none;place-items:center;background:#000a;z-index:10;} .modal .box{width:min(1200px,92vw);max-height:90vh;overflow:auto;background:#111a;border:2px solid #fff3;padding:1rem;border-radius:18px;} .modal textarea{width:100%;height:50vh;font:14px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#fff;background:#000;border:1px solid #444;border-radius:12px;padding:10px;} .modal .row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem}
@@ -69,7 +70,7 @@
           <div class="answer-facts" id="answerFacts"></div>
         </div>
       </main>
-      <footer>
+      <footer id="footer">
         <div class="controls">
           <button class="ctrl ghost" id="prev">◀ Prev</button>
           <button class="ctrl" id="reveal">🎇 Show Answer</button>
@@ -88,47 +89,35 @@
   </div>
   <div class="modal" id="modal"><div class="box"><h2 style="margin:0 0 .5rem 0">Edit Questions (JSON)</h2>        <p style="margin:.2rem 0 .8rem 0;opacity:.9">Paste an object with categories like <code>{"Food": [{"q":"Question","a":"Answer","facts":"HTML content with facts"}], "Gods": [...]}</code>. Your list is saved to <b>localStorage</b> only on this device.</p><textarea id="jsonArea"></textarea><div class="row"><button class="ctrl" id="saveJson">💾 Save</button><button class="ctrl ghost" id="closeJson">Close</button><input type="file" accept="application/json" id="fileInput" class="hidden" /><button class="ctrl secondary" id="loadFile">📁 Load .json file</button></div></div></div>
   <script>
-    const DEFAULT_QA={
-      "Food": [
-        {
-          q:"What sweet treat made of milk, sugar, and cardamom is popular during Diwali?",
-          a:"Gulab Jamun",
-          facts:"<h3>About Gulab Jamun</h3><ul><li><strong>Origin:</strong> The name comes from 'gulab' (rose water) and 'jamun' (a fruit it resembles)</li><li><strong>Preparation:</strong> Made from milk solids (khoya) or milk powder, shaped into balls and deep-fried</li><li><strong>Syrup:</strong> Soaked in sugar syrup flavored with rose water, cardamom, and sometimes saffron</li><li><strong>Significance:</strong> Represents sweetness and joy in celebrations, often offered to deities during Diwali prayers</li><li><strong>Variations:</strong> Can be stuffed with nuts, coconut, or served with rabri (thickened milk)</li></ul>"
-        },
-        {
-          q:"Which crispy diamond-shaped pastry is traditionally prepared for Diwali?",
-          a:"Gujiya (or Karanji)",
-          facts:"<h3>About Gujiya</h3><ul><li><strong>Shape:</strong> Half-moon or diamond-shaped dumpling with decorative crimped edges</li><li><strong>Filling:</strong> Sweet mixture of khoya (milk solids), coconut, nuts, and jaggery or sugar</li><li><strong>Regional Names:</strong> Called Karanji in Maharashtra, Ghughra in Gujarat, and Pedakiya in Odisha</li><li><strong>Preparation:</strong> Made with refined flour dough, filled with sweet mixture, sealed, and deep-fried until golden</li><li><strong>Tradition:</strong> Families gather to make these together, passing down recipes through generations</li></ul>"
-        }
-      ],
-      "Language": [
-        {
-          q:"What does the word 'Diwali' mean in Sanskrit?",
-          a:"Row of lights",
-          facts:"<h3>Etymology of Diwali</h3><ul><li><strong>Sanskrit Origin:</strong> 'Deepavali' combines 'deepa' (lamp/light) and 'avali' (row/series)</li><li><strong>Pronunciation:</strong> 'Diwali' is the shortened Hindi version of 'Deepavali'</li><li><strong>Symbolism:</strong> The row of lights represents the victory of light over darkness, good over evil</li><li><strong>Ancient Texts:</strong> References to lighting lamps for celebrations found in Vedic literature</li><li><strong>Cultural Spread:</strong> The term has been adopted in various forms across different Indian languages and cultures</li></ul>"
-        },
-        {
-          q:"In which language is the word 'Deepavali' more commonly used?",
-          a:"Tamil and other South Indian languages",
-          facts:"<h3>Regional Language Usage</h3><ul><li><strong>South India:</strong> Tamil, Telugu, Kannada, and Malayalam speakers prefer 'Deepavali'</li><li><strong>North India:</strong> Hindi, Punjabi, and other northern languages commonly use 'Diwali'</li><li><strong>Pronunciation:</strong> South Indians maintain the original Sanskrit pronunciation</li><li><strong>Cultural Context:</strong> Different regions have varying traditions but celebrate the same core themes</li><li><strong>Official Usage:</strong> Government documents often use 'Deepavali' as the formal name</li></ul>"
-        }
-      ],
-      "Gods": [
-        {
-          q:"Which goddess of wealth and prosperity is primarily worshipped during Diwali?",
-          a:"Goddess Lakshmi",
-          facts:"<h3>About Goddess Lakshmi</h3><ul><li><strong>Significance:</strong> Hindu goddess of wealth, fortune, prosperity, and abundance</li><li><strong>Appearance:</strong> Often depicted sitting on a lotus flower with four arms, holding lotus buds</li><li><strong>Symbols:</strong> Associated with gold coins, elephants, and owl (her vehicle)</li><li><strong>Diwali Connection:</strong> Believed to visit clean, well-lit homes on Diwali night to bless them with prosperity</li><li><strong>Worship Rituals:</strong> People clean their homes, light diyas, and create rangoli patterns to welcome her</li><li><strong>Mantras:</strong> 'Om Shreem Maha Lakshmiyei Namaha' is commonly chanted during prayers</li></ul>"
-        },
-        {
-          q:"Which Hindu god is associated with the removal of obstacles and is often worshipped before Diwali celebrations?",
-          a:"Lord Ganesha",
-          facts:"<h3>About Lord Ganesha</h3><ul><li><strong>Role:</strong> Remover of obstacles, patron of arts and sciences, and lord of beginnings</li><li><strong>Appearance:</strong> Elephant-headed deity with a human body, often depicted with four arms</li><li><strong>Symbols:</strong> Mouse as vehicle, modak (sweet) as favorite food, broken tusk, and large belly</li><li><strong>Diwali Significance:</strong> Invoked before starting any celebration or new venture to ensure success</li><li><strong>Worship Order:</strong> Traditionally worshipped before Goddess Lakshmi during Diwali prayers</li><li><strong>Popular Mantra:</strong> 'Ganpati Bappa Morya' and 'Om Gam Ganapataye Namaha'</li></ul>"
-        }
-      ]
-    };
+    let DEFAULT_QA = null;
+    
+    // Load questions from external JSON file
+    async function loadDefaultQuestions() {
+      try {
+        const response = await fetch('questions.json');
+        if (!response.ok) throw new Error('Failed to load questions');
+        DEFAULT_QA = await response.json();
+        console.log('Loaded questions from JSON file:', DEFAULT_QA);
+        console.log('Total questions loaded:', Object.keys(DEFAULT_QA).reduce((sum, cat) => sum + DEFAULT_QA[cat].length, 0));
+        initializeApp();
+      } catch (error) {
+        console.error('Error loading questions:', error);
+        // Fallback to minimal inline questions if external file fails
+        DEFAULT_QA = {
+          "Food": [{q:"What sweet treat is popular during Diwali?",a:"Gulab Jamun",facts:"<p>Sweet milk-based dessert.</p>"}],
+          "Language": [{q:"What does 'Diwali' mean?",a:"Row of lights",facts:"<p>From Sanskrit deepavali.</p>"}],
+          "Gods": [{q:"Which goddess is worshipped during Diwali?",a:"Goddess Lakshmi",facts:"<p>Goddess of wealth and prosperity.</p>"}]
+        };
+        console.warn('Using fallback questions');
+        initializeApp();
+      }
+    }
+    
+    function initializeApp() {
     const LS_KEY='diwali_trivia_qa_v1';const LS_IDX='diwali_trivia_idx_v1';const LS_ORDER='diwali_trivia_order_v1';const LS_AUTOPLAY='diwali_trivia_autoplay_v1';const LS_INTRO='diwali_trivia_intro_seen_v1';
     let qaData=loadQA();let qa=flattenQA(qaData);let order=[...Array(qa.length).keys()];let idx=0;let showAnswer=false;let autoplay=false;let intervalMs=12000;let timer=null;let quizStarted=false;
     const qEl=document.getElementById('q');const idxEl=document.getElementById('idx');
+    const footer=document.getElementById('footer');
     const introView=document.getElementById('introView');const startBtn=document.getElementById('startBtn');
     const questionView=document.getElementById('questionView');const answerView=document.getElementById('answerView');const answerTitle=document.getElementById('answerTitle');const answerFacts=document.getElementById('answerFacts');
     const btnPrev=document.getElementById('prev');const btnNext=document.getElementById('next');const btnReveal=document.getElementById('reveal');const btnShuffle=document.getElementById('shuffle');const btnAuto=document.getElementById('autoplay');const btnFS=document.getElementById('fs');const btnImport=document.getElementById('importBtn');const btnExport=document.getElementById('exportBtn');const btnHelp=document.getElementById('helpBtn');const modal=document.getElementById('modal');const jsonArea=document.getElementById('jsonArea');const btnSaveJson=document.getElementById('saveJson');const btnCloseJson=document.getElementById('closeJson');const fileInput=document.getElementById('fileInput');const btnLoadFile=document.getElementById('loadFile');
@@ -137,11 +126,46 @@
     btnPrev.onclick=prev;btnNext.onclick=next;btnReveal.onclick=toggleAnswer;btnShuffle.onclick=shuffleAll;btnAuto.onclick=toggleAutoplay;btnFS.onclick=toggleFullscreen;btnImport.onclick=openEditor;btnExport.onclick=exportJson;btnHelp.onclick=showHelp;btnSaveJson.onclick=saveJson;btnCloseJson.onclick=closeEditor;btnLoadFile.onclick=()=>fileInput.click();fileInput.onchange=onFileImport;
     window.onkeydown=e=>{if(!quizStarted&&e.key.toLowerCase()==='enter'){e.preventDefault();startQuiz();return;}if(!quizStarted)return;const k=e.key.toLowerCase();if(['arrowright','enter'].includes(k)){e.preventDefault();if(!showAnswer)toggleAnswer();else next();}if(k===' '){e.preventDefault();toggleAnswer();}if(['arrowleft','backspace'].includes(k)){e.preventDefault();prev();}if(k==='r'){shuffleAll();}if(k==='a'){toggleAutoplay();}if(k==='f'){toggleFullscreen();}if(k==='i'){openEditor();}if(k==='+'){intervalMs=Math.max(4000,intervalMs-1000);updateAutoplay(true);}if(k==='-'){intervalMs=Math.min(30000,intervalMs+1000);updateAutoplay(true);}if(k==='h'){showHelp();}};
     document.querySelector('.qa').onclick=e=>{if(quizStarted&&(e.target.closest('.question-view')||e.target.closest('.answer-view'))){toggleAnswer();}};
-    function checkIntro(){const introSeen=localStorage.getItem(LS_INTRO);if(!introSeen){showIntro();}else{startQuiz();}}
-    function showIntro(){quizStarted=false;introView.classList.add('show');questionView.classList.add('hidden');answerView.classList.remove('show');}
-    function startQuiz(){quizStarted=true;localStorage.setItem(LS_INTRO,'1');introView.classList.remove('show');questionView.classList.remove('hidden');render();updateAutoplay();}
+    function checkIntro(){showIntro();}
+    function showIntro(){quizStarted=false;introView.classList.add('show');questionView.classList.add('hidden');answerView.classList.remove('show');footer.classList.add('hidden');}
+    function startQuiz(){
+      quizStarted=true;
+      introView.classList.remove('show');
+      questionView.classList.remove('hidden');
+      footer.classList.remove('hidden');
+      // Reload questions to get fresh data
+      qaData=loadQA();
+      qa=flattenQA(qaData);
+      order=[...Array(qa.length).keys()];
+      idx=0;
+      showAnswer=false;
+      render();
+      updateAutoplay();
+    }
     function flattenQA(qaData){const flat=[];Object.keys(qaData).forEach(category=>{qaData[category].forEach(item=>{flat.push({...item,category});});});return flat;}
-    function render(){const i=order[idx];const item=qa[i];qEl.innerHTML=`<div style="color:var(--accent2);font-size:0.6em;margin-bottom:0.5em;opacity:0.9;font-weight:600;">${item.category}</div>${item.q}`;answerTitle.textContent=item.a||'';answerFacts.innerHTML=item.facts||'<p>No additional facts available.</p>';if(showAnswer){questionView.classList.add('hidden');answerView.classList.add('show');btnReveal.textContent='🔙 Back to Question';}else{questionView.classList.remove('hidden');answerView.classList.remove('show');btnReveal.textContent='🎇 Show Answer';}idxEl.textContent=`${idx+1} / ${qa.length}`;localStorage.setItem(LS_IDX,String(idx));}
+    function render(){
+      const i=order[idx];
+      const item=qa[i];
+      let questionHTML=`<div style="color:var(--accent2);font-size:0.6em;margin-bottom:0.5em;opacity:0.9;font-weight:600;">${item.category}</div>`;
+      if(item.image){
+        questionHTML+=`<img src="${item.image}" alt="Question image" class="question-image" onerror="this.style.display='none'">`;
+      }
+      questionHTML+=item.q;
+      qEl.innerHTML=questionHTML;
+      answerTitle.textContent=item.a||'';
+      answerFacts.innerHTML=item.facts||'<p>No additional facts available.</p>';
+      if(showAnswer){
+        questionView.classList.add('hidden');
+        answerView.classList.add('show');
+        btnReveal.textContent='🔙 Back to Question';
+      }else{
+        questionView.classList.remove('hidden');
+        answerView.classList.remove('show');
+        btnReveal.textContent='🎇 Show Answer';
+      }
+      idxEl.textContent=`${idx+1} / ${qa.length}`;
+      localStorage.setItem(LS_IDX,String(idx));
+    }
     function next(){showAnswer=false;idx=(idx+1)%qa.length;render();resetAutoplayTick();}
     function prev(){showAnswer=false;idx=(idx-1+qa.length)%qa.length;render();resetAutoplayTick();}
     function toggleAnswer(){showAnswer=!showAnswer;render();resetAutoplayTick();}
@@ -155,9 +179,13 @@
     function saveJson(){try{const parsed=JSON.parse(jsonArea.value);if(typeof parsed!=='object'||parsed===null)throw new Error('JSON must be an object with categories');const cleaned={};let totalItems=0;Object.keys(parsed).forEach(category=>{if(!Array.isArray(parsed[category]))throw new Error(`Category '${category}' must be an array`);const categoryItems=parsed[category].map(o=>({q:String(o.q||'').trim(),a:String(o.a||'').trim(),facts:o.facts||''})).filter(o=>o.q);if(categoryItems.length>0){cleaned[category]=categoryItems;totalItems+=categoryItems.length;}});if(totalItems===0)throw new Error('No valid items. Include objects with {q, a, facts} in categories.');qaData=cleaned;qa=flattenQA(qaData);order=[...Array(qa.length).keys()];idx=0;showAnswer=false;localStorage.setItem(LS_KEY,JSON.stringify(qaData));render();closeEditor();}catch(err){alert('Invalid JSON: '+err.message);}}
     function exportJson(){const blob=new Blob([JSON.stringify(qaData,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='diwali-trivia-qa.json';a.click();URL.revokeObjectURL(url);}
     function onFileImport(e){const file=e.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{jsonArea.value=String(reader.result||'');};reader.readAsText(file);}
-    function loadQA(){try{const raw=localStorage.getItem(LS_KEY);if(raw){const data=JSON.parse(raw);if(typeof data==='object'&&data!==null){return data;}}}catch{}return DEFAULT_QA;}
+    function loadQA(){console.log('Using DEFAULT_QA from JSON file');return DEFAULT_QA;}
     function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
     function showHelp(){alert(`Controls:\n\nSpace / Click  — Reveal/Hide answer\n→ / Enter       — Reveal then Next\n← / Backspace   — Previous\nR               — Shuffle order\nA               — Toggle Auto-play\n+ / -           — Auto speed ±1s (4–30s)\nF               — Fullscreen\nI               — Import / Edit JSON\nH               — This help`);}
+    }
+    
+    // Load questions and start the app
+    loadDefaultQuestions();
   </script>
 </body>
 </html>
