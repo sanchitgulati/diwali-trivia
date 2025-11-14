@@ -15,7 +15,10 @@
     .card{position:absolute;inset:0;display:grid;grid-template-rows:auto 1fr auto;gap:1.2rem;background:rgba(255,255,255,0.05);border:6px solid rgba(255,208,0,0.2);border-radius:28px;padding:clamp(16px,3vw,36px);box-shadow:var(--shadow);backdrop-filter:blur(6px);}
     header{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
     .title{display:flex;align-items:center;gap:.6rem;font-weight:900;letter-spacing:.5px;}
-    .title .logo{font-size:clamp(24px,4vw,40px);} .title .text{font-size:clamp(20px,2.6vw,34px);} .subtle{opacity:.8;font-size:clamp(12px,1.5vw,16px)}
+    .title .logo{font-size:clamp(24px,4vw,40px);} .title .text{font-size:clamp(20px,2.6vw,34px);}
+    .subtle{opacity:.8;font-size:clamp(12px,1.5vw,16px)}
+    .header-right{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;justify-content:flex-end;}
+    .header-maker-btn{font-size:clamp(12px,1.4vw,16px);padding:.5em 1em;}
     .qa{display:grid;align-content:center;text-align:center;padding:clamp(8px,2vw,16px);} 
     .intro-view{display:none;} .intro-view.show{display:block;animation:fadeIn .5s ease-out;}
     .intro-content{max-width:700px;margin:0 auto;padding:clamp(16px,3vw,32px);}
@@ -43,6 +46,44 @@
     .tips{display:none;}
     .hidden{display:none!important;} .pill{padding:.25em .6em;border-radius:999px;background:#ffffff22;}
     .modal{position:fixed;inset:0;display:none;place-items:center;background:#000a;z-index:10;} .modal .box{width:min(1200px,92vw);max-height:90vh;overflow:auto;background:#111a;border:2px solid #fff3;padding:1rem;border-radius:18px;} .modal textarea{width:100%;height:50vh;font:14px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#fff;background:#000;border:1px solid #444;border-radius:12px;padding:10px;} .modal .row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem}
+    .maker-backdrop{position:fixed;inset:0;display:none;place-items:center;background:#000d;z-index:12;}
+    .maker-backdrop.show{display:grid;}
+    .maker-dialog{width:min(1400px,96vw);height:min(860px,96vh);background:#12091f;border-radius:24px;box-shadow:var(--shadow);border:2px solid rgba(255,255,255,0.18);display:flex;flex-direction:column;overflow:hidden;}
+    .maker-header{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.2rem;border-bottom:1px solid rgba(255,255,255,0.1);background:linear-gradient(135deg,#7a2fd1,#c92e7d);}
+    .maker-title{font-weight:800;font-size:1.05rem;display:flex;flex-direction:column;gap:.1rem;}
+    .maker-title span{font-size:.8rem;opacity:.9;}
+    .maker-actions{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:flex-end;}
+    .maker-body{flex:1;display:grid;grid-template-columns:minmax(220px,320px) 1fr;background:radial-gradient(circle at top,#2b1441,#110718);border-top:1px solid rgba(0,0,0,0.7);}
+    .maker-list{border-right:1px solid rgba(255,255,255,0.12);padding:.75rem;overflow:auto;background:linear-gradient(180deg,rgba(0,0,0,0.25),rgba(0,0,0,0.55));}
+    .maker-list-item{padding:.55rem .65rem;border-radius:12px;margin-bottom:.4rem;cursor:pointer;background:rgba(255,255,255,0.04);border:1px solid transparent;display:flex;flex-direction:column;gap:.15rem;font-size:.82rem;transition:background .15s,border-color .15s,transform .1s;}
+    .maker-list-item:hover{background:rgba(255,255,255,0.08);transform:translateY(-1px);}
+    .maker-list-item.active{border-color:var(--accent3);background:rgba(0,217,200,0.14);}
+    .maker-list-item-title{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .maker-list-item-meta{opacity:.8;font-size:.75rem;display:flex;justify-content:space-between;gap:.3rem;}
+    .maker-add-btn{width:100%;margin-top:.4rem;border-radius:999px;padding:.55rem .75rem;font-size:.85rem;justify-content:center;display:flex;align-items:center;gap:.3rem;background:linear-gradient(180deg,var(--accent3),#00a9a0);}
+    .maker-main{padding:1rem 1.1rem;display:grid;grid-template-rows:auto 1fr;gap:.75rem;overflow:hidden;}
+    .maker-main-header{display:flex;justify-content:space-between;align-items:center;}
+    .maker-form{display:grid;grid-template-columns:1.35fr 1fr;gap:.9rem;height:100%;}
+    .maker-field{display:flex;flex-direction:column;gap:.25rem;font-size:.8rem;}
+    .maker-field label{font-weight:600;opacity:.9;}
+    .maker-field input,.maker-field textarea{border-radius:10px;border:1px solid rgba(255,255,255,0.18);background:rgba(4,2,15,0.9);color:var(--fg);padding:.45rem .55rem;font-family:inherit;font-size:.85rem;resize:vertical;min-height:2.4rem;}
+    .maker-field textarea{min-height:4.4rem;}
+    .maker-preview-card{background:rgba(255,255,255,0.04);border-radius:16px;padding:.75rem .9rem;box-shadow:0 8px 24px rgba(0,0,0,0.45);display:flex;flex-direction:column;gap:.5rem;height:100%;}
+    .maker-preview-question{font-weight:800;font-size:1rem;}
+    .maker-preview-answer{opacity:.9;font-size:.9rem;margin-top:auto;}
+    .maker-preview-image{max-width:100%;max-height:220px;border-radius:12px;margin:.35rem 0;object-fit:contain;box-shadow:0 4px 16px rgba(0,0,0,.4);display:none;}
+    .maker-tag{display:inline-flex;align-items:center;gap:.25rem;padding:.1rem .5rem;border-radius:999px;background:#ffffff22;font-size:.75rem;width:max-content;}
+    .maker-empty{opacity:.8;font-size:.9rem;}
+    .maker-footer-note{font-size:.75rem;opacity:.7;margin-top:.45rem;}
+    .maker-chip-row{display:flex;flex-wrap:wrap;gap:.4rem;font-size:.75rem;opacity:.8;}
+    .maker-chip{padding:.1rem .45rem;border-radius:999px;border:1px solid rgba(255,255,255,0.35);}
+    .maker-inline-buttons{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.35rem;}
+    .maker-danger{background:linear-gradient(180deg,var(--danger),#ff1744);}
+    @media (max-width:900px){
+      .maker-dialog{height:96vh;}
+      .maker-body{grid-template-columns:1fr;}
+      .maker-form{grid-template-columns:1fr;}
+    }
     ::-webkit-scrollbar{width:10px;height:10px} ::-webkit-scrollbar-thumb{background:#ffffff33;border-radius:10px}
   </style>
 </head>
@@ -51,7 +92,10 @@
     <div class="card">
       <header>
         <div class="title"><div class="logo">🪔</div><div class="text">Diwali Trivia Party</div></div>
-        <div class="subtle">Use <span class="pill">Space</span> to reveal • <span class="pill">←/→</span> to navigate • <span class="pill">F</span> fullscreen</div>
+        <div class="header-right">
+          <div class="subtle">Use <span class="pill">Space</span> to reveal • <span class="pill">←/→</span> to navigate • <span class="pill">F</span> fullscreen</div>
+          <button class="ctrl ghost header-maker-btn" id="makerOpenBtn">🛠 Trivia Maker</button>
+        </div>
       </header>
       <main class="qa" role="main" aria-live="polite">
         <div class="intro-view" id="introView">
@@ -87,7 +131,78 @@
       <div class="tips"></div>
     </div>
   </div>
+  <div class="maker-backdrop" id="makerOverlay">
+    <div class="maker-dialog">
+      <div class="maker-header">
+        <div class="maker-title">
+          <div>Trivia Maker</div>
+          <span>Design a custom trivia pack and export it as a zip</span>
+        </div>
+        <div class="maker-actions">
+          <button class="ctrl ghost" id="makerUploadZipBtn">⬆ Upload Zip</button>
+          <input type="file" accept=".zip,application/zip" id="makerZipInput" class="hidden" />
+          <button class="ctrl ghost" id="makerDownloadZipBtn">⬇ Download Zip</button>
+          <button class="ctrl secondary" id="makerResetBtn">↺ Reset to defaults</button>
+          <button class="ctrl" id="makerApplyBtn">✅ Save & Use</button>
+          <button class="ctrl ghost maker-danger" id="makerCloseBtn">✕ Close</button>
+        </div>
+      </div>
+      <div class="maker-body">
+        <aside class="maker-list">
+          <div id="makerList"></div>
+          <button class="ctrl maker-add-btn" id="makerAddBtn">＋ Add Question</button>
+          <div class="maker-footer-note">Tip: questions are grouped by category in the game.</div>
+        </aside>
+        <section class="maker-main">
+          <div class="maker-main-header">
+            <div class="maker-chip-row">
+              <span class="maker-chip">Use line breaks or HTML for options</span>
+              <span class="maker-chip">Images are embedded directly into the zip</span>
+            </div>
+          </div>
+          <div class="maker-form" id="makerForm">
+            <div>
+              <div class="maker-field">
+                <label for="makerCategoryInput">Category</label>
+                <input id="makerCategoryInput" placeholder="e.g. Food, Gods, Language" />
+              </div>
+              <div class="maker-field">
+                <label for="makerQuestionInput">Question</label>
+                <textarea id="makerQuestionInput" placeholder="Write the question. You can use line breaks or basic HTML for answer options."></textarea>
+              </div>
+              <div class="maker-field">
+                <label for="makerAnswerInput">Answer</label>
+                <input id="makerAnswerInput" placeholder="Short answer shown on reveal" />
+              </div>
+              <div class="maker-field">
+                <label for="makerFactsInput">Extra facts (HTML allowed)</label>
+                <textarea id="makerFactsInput" placeholder="Fun facts, explanations, or extra context."></textarea>
+              </div>
+              <div class="maker-inline-buttons">
+                <button class="ctrl ghost" id="makerDuplicateBtn">Duplicate</button>
+                <button class="ctrl ghost maker-danger" id="makerDeleteBtn">Delete</button>
+              </div>
+            </div>
+            <div>
+              <div class="maker-field">
+                <label for="makerImageInput">Image (optional)</label>
+                <input type="file" accept="image/*" id="makerImageInput" />
+              </div>
+              <div class="maker-preview-card">
+                <div class="maker-tag">Live preview</div>
+                <div class="maker-preview-question" id="makerPreviewQuestion">Your question text will appear here.</div>
+                <img class="maker-preview-image" id="makerPreviewImage" alt="" />
+                <div class="maker-preview-answer" id="makerPreviewAnswer">Answer and image preview update as you type.</div>
+              </div>
+            </div>
+          </div>
+          <div class="maker-empty" id="makerEmpty">Add your first question to begin.</div>
+        </section>
+      </div>
+    </div>
+  </div>
   <div class="modal" id="modal"><div class="box"><h2 style="margin:0 0 .5rem 0">Edit Questions (JSON)</h2>        <p style="margin:.2rem 0 .8rem 0;opacity:.9">Paste an object with categories like <code>{"Food": [{"q":"Question","a":"Answer","facts":"HTML content with facts"}], "Gods": [...]}</code>. Your list is saved to <b>localStorage</b> only on this device.</p><textarea id="jsonArea"></textarea><div class="row"><button class="ctrl" id="saveJson">💾 Save</button><button class="ctrl ghost" id="closeJson">Close</button><input type="file" accept="application/json" id="fileInput" class="hidden" /><button class="ctrl secondary" id="loadFile">📁 Load .json file</button></div></div></div>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
   <script>
     let DEFAULT_QA = null;
     
@@ -114,74 +229,678 @@
     }
     
     function initializeApp() {
-    const LS_KEY='diwali_trivia_qa_v1';const LS_IDX='diwali_trivia_idx_v1';const LS_ORDER='diwali_trivia_order_v1';const LS_AUTOPLAY='diwali_trivia_autoplay_v1';const LS_INTRO='diwali_trivia_intro_seen_v1';
-    let qaData=loadQA();let qa=flattenQA(qaData);let order=[...Array(qa.length).keys()];let idx=0;let showAnswer=false;let autoplay=false;let intervalMs=12000;let timer=null;let quizStarted=false;
-    const qEl=document.getElementById('q');const idxEl=document.getElementById('idx');
-    const footer=document.getElementById('footer');
-    const introView=document.getElementById('introView');const startBtn=document.getElementById('startBtn');
-    const questionView=document.getElementById('questionView');const answerView=document.getElementById('answerView');const answerTitle=document.getElementById('answerTitle');const answerFacts=document.getElementById('answerFacts');
-    const btnPrev=document.getElementById('prev');const btnNext=document.getElementById('next');const btnReveal=document.getElementById('reveal');const btnShuffle=document.getElementById('shuffle');const btnAuto=document.getElementById('autoplay');const btnFS=document.getElementById('fs');const btnImport=document.getElementById('importBtn');const btnExport=document.getElementById('exportBtn');const btnHelp=document.getElementById('helpBtn');const modal=document.getElementById('modal');const jsonArea=document.getElementById('jsonArea');const btnSaveJson=document.getElementById('saveJson');const btnCloseJson=document.getElementById('closeJson');const fileInput=document.getElementById('fileInput');const btnLoadFile=document.getElementById('loadFile');
-    checkIntro();
-    startBtn.onclick=startQuiz;
-    btnPrev.onclick=prev;btnNext.onclick=next;btnReveal.onclick=toggleAnswer;btnShuffle.onclick=shuffleAll;btnAuto.onclick=toggleAutoplay;btnFS.onclick=toggleFullscreen;btnImport.onclick=openEditor;btnExport.onclick=exportJson;btnHelp.onclick=showHelp;btnSaveJson.onclick=saveJson;btnCloseJson.onclick=closeEditor;btnLoadFile.onclick=()=>fileInput.click();fileInput.onchange=onFileImport;
-    window.onkeydown=e=>{if(!quizStarted&&e.key.toLowerCase()==='enter'){e.preventDefault();startQuiz();return;}if(!quizStarted)return;const k=e.key.toLowerCase();if(['arrowright','enter'].includes(k)){e.preventDefault();if(!showAnswer)toggleAnswer();else next();}if(k===' '){e.preventDefault();toggleAnswer();}if(['arrowleft','backspace'].includes(k)){e.preventDefault();prev();}if(k==='r'){shuffleAll();}if(k==='a'){toggleAutoplay();}if(k==='f'){toggleFullscreen();}if(k==='i'){openEditor();}if(k==='+'){intervalMs=Math.max(4000,intervalMs-1000);updateAutoplay(true);}if(k==='-'){intervalMs=Math.min(30000,intervalMs+1000);updateAutoplay(true);}if(k==='h'){showHelp();}};
-    document.querySelector('.qa').onclick=e=>{if(quizStarted&&(e.target.closest('.question-view')||e.target.closest('.answer-view'))){toggleAnswer();}};
-    function checkIntro(){showIntro();}
-    function showIntro(){quizStarted=false;introView.classList.add('show');questionView.classList.add('hidden');answerView.classList.remove('show');footer.classList.add('hidden');}
-    function startQuiz(){
-      quizStarted=true;
-      introView.classList.remove('show');
-      questionView.classList.remove('hidden');
-      footer.classList.remove('hidden');
-      // Reload questions to get fresh data
-      qaData=loadQA();
-      qa=flattenQA(qaData);
-      order=[...Array(qa.length).keys()];
-      idx=0;
-      showAnswer=false;
-      render();
-      updateAutoplay();
-    }
-    function flattenQA(qaData){const flat=[];Object.keys(qaData).forEach(category=>{qaData[category].forEach(item=>{flat.push({...item,category});});});return flat;}
-    function render(){
-      const i=order[idx];
-      const item=qa[i];
-      let questionHTML=`<div style="color:var(--accent2);font-size:0.6em;margin-bottom:0.5em;opacity:0.9;font-weight:600;">${item.category}</div>`;
-      if(item.image){
-        questionHTML+=`<img src="${item.image}" alt="Question image" class="question-image" onerror="this.style.display='none'">`;
+      const LS_KEY = 'diwali_trivia_qa_v1';
+      const LS_IDX = 'diwali_trivia_idx_v1';
+      const LS_AUTOPLAY = 'diwali_trivia_autoplay_v1';
+      const LS_INTRO = 'diwali_trivia_intro_seen_v1';
+
+      let qaData = loadQA();
+      let qa = flattenQA(qaData);
+      let order = [...Array(qa.length).keys()];
+      let idx = 0;
+      let showAnswer = false;
+      let autoplay = false;
+      let intervalMs = 12000;
+      let timer = null;
+      let quizStarted = false;
+
+      const qEl = document.getElementById('q');
+      const idxEl = document.getElementById('idx');
+      const footer = document.getElementById('footer');
+
+      const introView = document.getElementById('introView');
+      const startBtn = document.getElementById('startBtn');
+
+      const questionView = document.getElementById('questionView');
+      const answerView = document.getElementById('answerView');
+      const answerTitle = document.getElementById('answerTitle');
+      const answerFacts = document.getElementById('answerFacts');
+
+      const btnPrev = document.getElementById('prev');
+      const btnNext = document.getElementById('next');
+      const btnReveal = document.getElementById('reveal');
+      const btnShuffle = document.getElementById('shuffle');
+      const btnAuto = document.getElementById('autoplay');
+      const btnFS = document.getElementById('fs');
+      const btnHelp = document.getElementById('helpBtn');
+
+      const modal = document.getElementById('modal');
+      const jsonArea = document.getElementById('jsonArea');
+      const btnSaveJson = document.getElementById('saveJson');
+      const btnCloseJson = document.getElementById('closeJson');
+      const fileInput = document.getElementById('fileInput');
+      const btnLoadFile = document.getElementById('loadFile');
+
+      const makerOpenBtn = document.getElementById('makerOpenBtn');
+      const makerOverlay = document.getElementById('makerOverlay');
+      const makerList = document.getElementById('makerList');
+      const makerAddBtn = document.getElementById('makerAddBtn');
+      const makerCategoryInput = document.getElementById('makerCategoryInput');
+      const makerQuestionInput = document.getElementById('makerQuestionInput');
+      const makerAnswerInput = document.getElementById('makerAnswerInput');
+      const makerFactsInput = document.getElementById('makerFactsInput');
+      const makerImageInput = document.getElementById('makerImageInput');
+      const makerPreviewQuestion = document.getElementById('makerPreviewQuestion');
+      const makerPreviewImage = document.getElementById('makerPreviewImage');
+      const makerPreviewAnswer = document.getElementById('makerPreviewAnswer');
+      const makerDuplicateBtn = document.getElementById('makerDuplicateBtn');
+      const makerDeleteBtn = document.getElementById('makerDeleteBtn');
+      const makerApplyBtn = document.getElementById('makerApplyBtn');
+      const makerCloseBtn = document.getElementById('makerCloseBtn');
+      const makerDownloadZipBtn = document.getElementById('makerDownloadZipBtn');
+      const makerUploadZipBtn = document.getElementById('makerUploadZipBtn');
+      const makerZipInput = document.getElementById('makerZipInput');
+      const makerResetBtn = document.getElementById('makerResetBtn');
+      const makerForm = document.getElementById('makerForm');
+      const makerEmpty = document.getElementById('makerEmpty');
+
+      let makerQuestions = [];
+      let makerSelectedId = null;
+
+      checkIntro();
+
+      if (startBtn) startBtn.onclick = startQuiz;
+      if (btnPrev) btnPrev.onclick = prev;
+      if (btnNext) btnNext.onclick = next;
+      if (btnReveal) btnReveal.onclick = toggleAnswer;
+      if (btnShuffle) btnShuffle.onclick = shuffleAll;
+      if (btnAuto) btnAuto.onclick = toggleAutoplay;
+      if (btnFS) btnFS.onclick = toggleFullscreen;
+      if (btnHelp) btnHelp.onclick = showHelp;
+
+      if (btnSaveJson) btnSaveJson.onclick = saveJson;
+      if (btnCloseJson) btnCloseJson.onclick = closeEditor;
+      if (btnLoadFile && fileInput) btnLoadFile.onclick = () => fileInput.click();
+      if (fileInput) fileInput.onchange = onFileImport;
+
+      if (makerOpenBtn) makerOpenBtn.onclick = () => {
+        populateMakerFromQA();
+        openMaker();
+      };
+      if (makerCloseBtn) makerCloseBtn.onclick = closeMaker;
+      if (makerAddBtn) makerAddBtn.onclick = addMakerQuestion;
+      if (makerDuplicateBtn) makerDuplicateBtn.onclick = duplicateMakerQuestion;
+      if (makerDeleteBtn) makerDeleteBtn.onclick = deleteMakerQuestion;
+      if (makerApplyBtn) makerApplyBtn.onclick = () => {
+        applyMakerChanges();
+        closeMaker();
+      };
+      if (makerResetBtn) makerResetBtn.onclick = resetToDefaults;
+      if (makerDownloadZipBtn) makerDownloadZipBtn.onclick = exportZipPack;
+      if (makerUploadZipBtn && makerZipInput) {
+        makerUploadZipBtn.onclick = () => makerZipInput.click();
+        makerZipInput.onchange = e => {
+          const file = e.target.files && e.target.files[0];
+          if (file) importZipPack(file);
+          e.target.value = '';
+        };
       }
-      questionHTML+=item.q;
-      qEl.innerHTML=questionHTML;
-      answerTitle.textContent=item.a||'';
-      answerFacts.innerHTML=item.facts||'<p>No additional facts available.</p>';
-      if(showAnswer){
-        questionView.classList.add('hidden');
-        answerView.classList.add('show');
-        btnReveal.textContent='🔙 Back to Question';
-      }else{
-        questionView.classList.remove('hidden');
-        answerView.classList.remove('show');
-        btnReveal.textContent='🎇 Show Answer';
+
+      if (makerCategoryInput) makerCategoryInput.addEventListener('input', syncMakerFormToState);
+      if (makerQuestionInput) makerQuestionInput.addEventListener('input', syncMakerFormToState);
+      if (makerAnswerInput) makerAnswerInput.addEventListener('input', syncMakerFormToState);
+      if (makerFactsInput) makerFactsInput.addEventListener('input', syncMakerFormToState);
+      if (makerImageInput) {
+        makerImageInput.onchange = e => {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = () => {
+            const current = getCurrentMakerQuestion();
+            if (!current) return;
+            current.image = String(reader.result || '');
+            renderMakerPreview();
+          };
+          reader.readAsDataURL(file);
+        };
       }
-      idxEl.textContent=`${idx+1} / ${qa.length}`;
-      localStorage.setItem(LS_IDX,String(idx));
-    }
-    function next(){showAnswer=false;idx=(idx+1)%qa.length;render();resetAutoplayTick();}
-    function prev(){showAnswer=false;idx=(idx-1+qa.length)%qa.length;render();resetAutoplayTick();}
-    function toggleAnswer(){showAnswer=!showAnswer;render();resetAutoplayTick();}
-    function shuffleAll(){order=shuffle([...Array(qa.length).keys()]);idx=0;showAnswer=false;render();}
-    function toggleAutoplay(){autoplay=!autoplay;localStorage.setItem(LS_AUTOPLAY,autoplay?'1':'0');updateAutoplay();}
-    function updateAutoplay(bump){btnAuto.textContent=autoplay?`⏸ Auto (${Math.round(intervalMs/1000)}s)`:'▶︎ Auto';if(autoplay){clearInterval(timer);timer=setInterval(()=>{if(!showAnswer){toggleAnswer();}else{next();}},intervalMs);}else{clearInterval(timer);timer=null;}}
-    function resetAutoplayTick(){if(autoplay){updateAutoplay(true);}}
-    function toggleFullscreen(){const el=document.documentElement;if(!document.fullscreenElement){el.requestFullscreen?.();}else{document.exitFullscreen?.();}}
-    function openEditor(){jsonArea.value=JSON.stringify(qaData,null,2);modal.style.display='grid';}
-    function closeEditor(){modal.style.display='none';}
-    function saveJson(){try{const parsed=JSON.parse(jsonArea.value);if(typeof parsed!=='object'||parsed===null)throw new Error('JSON must be an object with categories');const cleaned={};let totalItems=0;Object.keys(parsed).forEach(category=>{if(!Array.isArray(parsed[category]))throw new Error(`Category '${category}' must be an array`);const categoryItems=parsed[category].map(o=>({q:String(o.q||'').trim(),a:String(o.a||'').trim(),facts:o.facts||''})).filter(o=>o.q);if(categoryItems.length>0){cleaned[category]=categoryItems;totalItems+=categoryItems.length;}});if(totalItems===0)throw new Error('No valid items. Include objects with {q, a, facts} in categories.');qaData=cleaned;qa=flattenQA(qaData);order=[...Array(qa.length).keys()];idx=0;showAnswer=false;localStorage.setItem(LS_KEY,JSON.stringify(qaData));render();closeEditor();}catch(err){alert('Invalid JSON: '+err.message);}}
-    function exportJson(){const blob=new Blob([JSON.stringify(qaData,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='diwali-trivia-qa.json';a.click();URL.revokeObjectURL(url);}
-    function onFileImport(e){const file=e.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{jsonArea.value=String(reader.result||'');};reader.readAsText(file);}
-    function loadQA(){console.log('Using DEFAULT_QA from JSON file');return DEFAULT_QA;}
-    function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
-    function showHelp(){alert(`Controls:\n\nSpace / Click  — Reveal/Hide answer\n→ / Enter       — Reveal then Next\n← / Backspace   — Previous\nR               — Shuffle order\nA               — Toggle Auto-play\n+ / -           — Auto speed ±1s (4–30s)\nF               — Fullscreen\nI               — Import / Edit JSON\nH               — This help`);}
+
+      window.onkeydown = e => {
+        const k = e.key.toLowerCase();
+        if (!quizStarted && k === 'enter') {
+          e.preventDefault();
+          startQuiz();
+          return;
+        }
+        if (makerOverlay && makerOverlay.classList.contains('show')) {
+          if (k === 'escape') {
+            e.preventDefault();
+            closeMaker();
+          }
+          return;
+        }
+        if (!quizStarted) return;
+        if (['arrowright', 'enter'].includes(k)) {
+          e.preventDefault();
+          if (!showAnswer) toggleAnswer(); else next();
+        } else if (k === ' ') {
+          e.preventDefault();
+          toggleAnswer();
+        } else if (['arrowleft', 'backspace'].includes(k)) {
+          e.preventDefault();
+          prev();
+        } else if (k === 'r') {
+          shuffleAll();
+        } else if (k === 'a') {
+          toggleAutoplay();
+        } else if (k === 'f') {
+          toggleFullscreen();
+        } else if (k === 'i') {
+          e.preventDefault();
+          populateMakerFromQA();
+          openMaker();
+        } else if (k === '+') {
+          intervalMs = Math.max(4000, intervalMs - 1000);
+          updateAutoplay(true);
+        } else if (k === '-') {
+          intervalMs = Math.min(30000, intervalMs + 1000);
+          updateAutoplay(true);
+        } else if (k === 'h') {
+          showHelp();
+        }
+      };
+
+      const qaContainer = document.querySelector('.qa');
+      if (qaContainer) {
+        qaContainer.onclick = e => {
+          if (!quizStarted) return;
+          const target = e.target;
+          if (target.closest('.question-view') || target.closest('.answer-view')) {
+            toggleAnswer();
+          }
+        };
+      }
+
+      function checkIntro() {
+        const seen = localStorage.getItem(LS_INTRO);
+        if (seen === '1') {
+          quizStarted = true;
+          introView.classList.remove('show');
+          questionView.classList.remove('hidden');
+          footer.classList.remove('hidden');
+          render();
+          updateAutoplay();
+        } else {
+          showIntro();
+        }
+      }
+
+      function showIntro() {
+        quizStarted = false;
+        if (introView) introView.classList.add('show');
+        if (questionView) questionView.classList.add('hidden');
+        if (answerView) answerView.classList.remove('show');
+        if (footer) footer.classList.add('hidden');
+      }
+
+      function startQuiz() {
+        quizStarted = true;
+        localStorage.setItem(LS_INTRO, '1');
+        if (introView) introView.classList.remove('show');
+        if (questionView) questionView.classList.remove('hidden');
+        if (footer) footer.classList.remove('hidden');
+        qaData = loadQA();
+        qa = flattenQA(qaData);
+        order = [...Array(qa.length).keys()];
+        const storedIdx = Number(localStorage.getItem(LS_IDX) || '0');
+        idx = Number.isFinite(storedIdx) && storedIdx >= 0 && storedIdx < qa.length ? storedIdx : 0;
+        showAnswer = false;
+        render();
+        const storedAuto = localStorage.getItem(LS_AUTOPLAY) === '1';
+        autoplay = storedAuto;
+        updateAutoplay();
+      }
+
+      function flattenQA(qaDataObj) {
+        const flat = [];
+        Object.keys(qaDataObj).forEach(category => {
+          qaDataObj[category].forEach(item => {
+            flat.push({ ...item, category });
+          });
+        });
+        return flat;
+      }
+
+      function render() {
+        if (!qa.length) {
+          qEl.textContent = 'No questions yet – open the Trivia Maker to add some!';
+          answerTitle.textContent = '';
+          answerFacts.innerHTML = '';
+          idxEl.textContent = '0 / 0';
+          return;
+        }
+        const i = order[idx];
+        const item = qa[i];
+        let questionHTML = `<div style="color:var(--accent2);font-size:0.6em;margin-bottom:0.5em;opacity:0.9;font-weight:600;">${item.category}</div>`;
+        if (item.image) {
+          questionHTML += `<img src="${item.image}" alt="Question image" class="question-image" onerror="this.style.display='none'">`;
+        }
+        questionHTML += item.q;
+        qEl.innerHTML = questionHTML;
+        answerTitle.textContent = item.a || '';
+        answerFacts.innerHTML = item.facts || '<p>No additional facts available.</p>';
+        if (showAnswer) {
+          questionView.classList.add('hidden');
+          answerView.classList.add('show');
+          btnReveal.textContent = '🔙 Back to Question';
+        } else {
+          questionView.classList.remove('hidden');
+          answerView.classList.remove('show');
+          btnReveal.textContent = '🎇 Show Answer';
+        }
+        idxEl.textContent = `${idx + 1} / ${qa.length}`;
+        localStorage.setItem(LS_IDX, String(idx));
+      }
+
+      function next() {
+        if (!qa.length) return;
+        showAnswer = false;
+        idx = (idx + 1) % qa.length;
+        render();
+        resetAutoplayTick();
+      }
+
+      function prev() {
+        if (!qa.length) return;
+        showAnswer = false;
+        idx = (idx - 1 + qa.length) % qa.length;
+        render();
+        resetAutoplayTick();
+      }
+
+      function toggleAnswer() {
+        if (!qa.length) return;
+        showAnswer = !showAnswer;
+        render();
+        resetAutoplayTick();
+      }
+
+      function shuffleAll() {
+        order = shuffle([...Array(qa.length).keys()]);
+        idx = 0;
+        showAnswer = false;
+        render();
+      }
+
+      function toggleAutoplay() {
+        autoplay = !autoplay;
+        localStorage.setItem(LS_AUTOPLAY, autoplay ? '1' : '0');
+        updateAutoplay();
+      }
+
+      function updateAutoplay() {
+        if (!btnAuto) return;
+        btnAuto.textContent = autoplay ? `⏸ Auto (${Math.round(intervalMs / 1000)}s)` : '▶︎ Auto';
+        if (autoplay) {
+          clearInterval(timer);
+          timer = setInterval(() => {
+            if (!showAnswer) {
+              toggleAnswer();
+            } else {
+              next();
+            }
+          }, intervalMs);
+        } else {
+          clearInterval(timer);
+          timer = null;
+        }
+      }
+
+      function resetAutoplayTick() {
+        if (autoplay) updateAutoplay();
+      }
+
+      function toggleFullscreen() {
+        const el = document.documentElement;
+        if (!document.fullscreenElement) {
+          el.requestFullscreen?.();
+        } else {
+          document.exitFullscreen?.();
+        }
+      }
+
+      function openEditor() {
+        if (!modal || !jsonArea) return;
+        jsonArea.value = JSON.stringify(qaData, null, 2);
+        modal.style.display = 'grid';
+      }
+
+      function closeEditor() {
+        if (!modal) return;
+        modal.style.display = 'none';
+      }
+
+      function normalizeQA(parsed) {
+        if (typeof parsed !== 'object' || parsed === null) {
+          throw new Error('JSON must be an object with categories');
+        }
+        const cleaned = {};
+        let totalItems = 0;
+        Object.keys(parsed).forEach(category => {
+          if (!Array.isArray(parsed[category])) {
+            throw new Error(`Category '${category}' must be an array`);
+          }
+          const items = parsed[category]
+            .map(o => ({
+              q: String(o.q || '').trim(),
+              a: String(o.a || '').trim(),
+              facts: o.facts || '',
+              image: o.image || ''
+            }))
+            .filter(o => o.q);
+          if (items.length > 0) {
+            cleaned[category] = items;
+            totalItems += items.length;
+          }
+        });
+        if (!totalItems) {
+          throw new Error('No valid items. Include objects with {q, a, facts} in categories.');
+        }
+        return cleaned;
+      }
+
+      function saveJson() {
+        try {
+          const parsed = JSON.parse(jsonArea.value);
+          qaData = normalizeQA(parsed);
+          qa = flattenQA(qaData);
+          order = [...Array(qa.length).keys()];
+          idx = 0;
+          showAnswer = false;
+          localStorage.setItem(LS_KEY, JSON.stringify(qaData));
+          render();
+          closeEditor();
+        } catch (err) {
+          alert('Invalid JSON: ' + err.message);
+        }
+      }
+
+      function onFileImport(e) {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          jsonArea.value = String(reader.result || '');
+        };
+        reader.readAsText(file);
+      }
+
+      function loadQA() {
+        try {
+          const raw = localStorage.getItem(LS_KEY);
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            console.log('Loaded questions from localStorage');
+            return normalizeQA(parsed);
+          }
+        } catch (err) {
+          console.warn('Ignoring invalid local trivia data', err);
+        }
+        console.log('Using DEFAULT_QA from JSON file');
+        return normalizeQA(DEFAULT_QA);
+      }
+
+      function shuffle(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      function showHelp() {
+        alert(`Controls:\n\nSpace / Click  — Reveal/Hide answer\n→ / Enter       — Reveal then Next\n← / Backspace   — Previous\nR               — Shuffle order\nA               — Toggle Auto-play\n+ / -           — Auto speed ±1s (4–30s)\nF               — Fullscreen\nI               — Trivia Maker\nH               — This help`);
+      }
+
+      function openMaker() {
+        if (!makerOverlay) return;
+        makerOverlay.classList.add('show');
+        renderMakerUI();
+      }
+
+      function closeMaker() {
+        if (!makerOverlay) return;
+        makerOverlay.classList.remove('show');
+      }
+
+      function populateMakerFromQA() {
+        makerQuestions = [];
+        Object.keys(qaData).forEach(category => {
+          qaData[category].forEach(item => {
+            makerQuestions.push({
+              id: makeId(),
+              category,
+              q: item.q || '',
+              a: item.a || '',
+              facts: item.facts || '',
+              image: item.image || ''
+            });
+          });
+        });
+        if (!makerQuestions.length) {
+          makerQuestions.push({
+            id: makeId(),
+            category: 'General',
+            q: '',
+            a: '',
+            facts: '',
+            image: ''
+          });
+        }
+        makerSelectedId = makerQuestions[0].id;
+        renderMakerUI();
+      }
+
+      function makeId() {
+        return 'q_' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+      }
+
+      function getCurrentMakerQuestion() {
+        if (!makerSelectedId) return null;
+        return makerQuestions.find(q => q.id === makerSelectedId) || null;
+      }
+
+      function renderMakerUI() {
+        if (!makerList || !makerForm || !makerEmpty) return;
+        makerList.innerHTML = '';
+        makerQuestions.forEach((qItem, index) => {
+          const div = document.createElement('div');
+          div.className = 'maker-list-item' + (qItem.id === makerSelectedId ? ' active' : '');
+          div.dataset.id = qItem.id;
+          const label = qItem.q || '(untitled question)';
+          const short = label.length > 40 ? label.slice(0, 40) + '…' : label;
+          div.innerHTML = `<div class="maker-list-item-title">Question ${index + 1}</div><div class="maker-list-item-meta"><span>${qItem.category || 'No category'}</span><span>${short}</span></div>`;
+          div.onclick = () => {
+            makerSelectedId = qItem.id;
+            renderMakerUI();
+          };
+          makerList.appendChild(div);
+        });
+        if (makerQuestions.length) {
+          makerForm.style.display = 'grid';
+          makerEmpty.style.display = 'none';
+          renderMakerForm();
+        } else {
+          makerForm.style.display = 'none';
+          makerEmpty.style.display = 'block';
+        }
+      }
+
+      function renderMakerForm() {
+        const current = getCurrentMakerQuestion();
+        if (!current) return;
+        if (makerCategoryInput) makerCategoryInput.value = current.category || '';
+        if (makerQuestionInput) makerQuestionInput.value = current.q || '';
+        if (makerAnswerInput) makerAnswerInput.value = current.a || '';
+        if (makerFactsInput) makerFactsInput.value = current.facts || '';
+        renderMakerPreview();
+      }
+
+      function renderMakerPreview() {
+        const current = getCurrentMakerQuestion();
+        if (!current) return;
+        if (makerPreviewQuestion) {
+          makerPreviewQuestion.innerHTML = current.q || 'Your question text will appear here.';
+        }
+        if (makerPreviewAnswer) {
+          makerPreviewAnswer.textContent = current.a || 'Answer and image preview update as you type.';
+        }
+        if (makerPreviewImage) {
+          if (current.image) {
+            makerPreviewImage.src = current.image;
+            makerPreviewImage.style.display = 'block';
+          } else {
+            makerPreviewImage.style.display = 'none';
+            makerPreviewImage.removeAttribute('src');
+          }
+        }
+      }
+
+      function syncMakerFormToState() {
+        const current = getCurrentMakerQuestion();
+        if (!current) return;
+        if (makerCategoryInput) current.category = makerCategoryInput.value;
+        if (makerQuestionInput) current.q = makerQuestionInput.value;
+        if (makerAnswerInput) current.a = makerAnswerInput.value;
+        if (makerFactsInput) current.facts = makerFactsInput.value;
+        renderMakerUI();
+      }
+
+      function addMakerQuestion() {
+        const last = makerQuestions[makerQuestions.length - 1];
+        const newQuestion = {
+          id: makeId(),
+          category: last ? last.category : 'General',
+          q: '',
+          a: '',
+          facts: '',
+          image: ''
+        };
+        makerQuestions.push(newQuestion);
+        makerSelectedId = newQuestion.id;
+        renderMakerUI();
+      }
+
+      function duplicateMakerQuestion() {
+        const current = getCurrentMakerQuestion();
+        if (!current) return;
+        const idxQ = makerQuestions.findIndex(q => q.id === current.id);
+        const clone = {
+          ...current,
+          id: makeId()
+        };
+        makerQuestions.splice(idxQ + 1, 0, clone);
+        makerSelectedId = clone.id;
+        renderMakerUI();
+      }
+
+      function deleteMakerQuestion() {
+        const current = getCurrentMakerQuestion();
+        if (!current) return;
+        if (!confirm('Delete this question?')) return;
+        makerQuestions = makerQuestions.filter(q => q.id !== current.id);
+        if (makerQuestions.length) {
+          makerSelectedId = makerQuestions[0].id;
+        } else {
+          makerSelectedId = null;
+        }
+        renderMakerUI();
+      }
+
+      function buildQAFromMaker() {
+        const raw = {};
+        makerQuestions.forEach(qItem => {
+          const category = (qItem.category || 'General').trim() || 'General';
+          if (!raw[category]) raw[category] = [];
+          raw[category].push({
+            q: (qItem.q || '').trim(),
+            a: (qItem.a || '').trim(),
+            facts: qItem.facts || '',
+            image: qItem.image || ''
+          });
+        });
+        return normalizeQA(raw);
+      }
+
+      function applyMakerChanges() {
+        try {
+          qaData = buildQAFromMaker();
+          qa = flattenQA(qaData);
+          order = [...Array(qa.length).keys()];
+          idx = 0;
+          showAnswer = false;
+          localStorage.setItem(LS_KEY, JSON.stringify(qaData));
+          render();
+        } catch (err) {
+          alert('Could not save questions: ' + err.message);
+        }
+      }
+
+      async function exportZipPack() {
+        try {
+          const packQA = makerQuestions.length ? buildQAFromMaker() : qaData;
+          if (!window.JSZip) {
+            alert('Zip support is not available. Check your internet connection and reload.');
+            return;
+          }
+          const zip = new JSZip();
+          zip.file('questions.json', JSON.stringify(packQA, null, 2));
+          const blob = await zip.generateAsync({ type: 'blob' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'diwali-trivia-pack.zip';
+          a.click();
+          URL.revokeObjectURL(url);
+        } catch (err) {
+          alert('Failed to create zip: ' + err.message);
+        }
+      }
+
+      async function importZipPack(file) {
+        try {
+          if (!window.JSZip) {
+            alert('Zip support is not available. Check your internet connection and reload.');
+            return;
+          }
+          const zip = await JSZip.loadAsync(file);
+          let entry = zip.file('questions.json')[0];
+          if (!entry) {
+            const jsonFiles = zip.file(/\.json$/i);
+            if (!jsonFiles.length) throw new Error('No .json file found inside zip');
+            entry = jsonFiles[0];
+          }
+          const text = await entry.async('string');
+          const parsed = JSON.parse(text);
+          qaData = normalizeQA(parsed);
+          qa = flattenQA(qaData);
+          order = [...Array(qa.length).keys()];
+          idx = 0;
+          showAnswer = false;
+          localStorage.setItem(LS_KEY, JSON.stringify(qaData));
+          render();
+          populateMakerFromQA();
+          alert('Trivia pack loaded!');
+        } catch (err) {
+          alert('Could not read zip: ' + err.message);
+        }
+      }
+
+      function resetToDefaults() {
+        if (!confirm('Reset to the original Diwali trivia pack?')) return;
+        try {
+          qaData = normalizeQA(DEFAULT_QA);
+          qa = flattenQA(qaData);
+          order = [...Array(qa.length).keys()];
+          idx = 0;
+          showAnswer = false;
+          localStorage.removeItem(LS_KEY);
+          render();
+          populateMakerFromQA();
+        } catch (err) {
+          alert('Failed to reset: ' + err.message);
+        }
+      }
     }
     
     // Load questions and start the app
