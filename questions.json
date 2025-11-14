@@ -1,100 +1,48 @@
 {
-  "Food": [
+  "General": [
     {
-      "q": "What sweet treat made of milk, sugar, and cardamom is popular during Diwali?",
-      "a": "Gulab Jamun",
-      "facts": "<h3>About Gulab Jamun</h3><ul><li><strong>Origin:</strong> The name comes from 'gulab' (rose water) and 'jamun' (a fruit it resembles)</li><li><strong>Preparation:</strong> Made from milk solids (khoya) or milk powder, shaped into balls and deep-fried</li><li><strong>Syrup:</strong> Soaked in sugar syrup flavored with rose water, cardamom, and sometimes saffron</li><li><strong>Significance:</strong> Represents sweetness and joy in celebrations, often offered to deities during Diwali prayers</li><li><strong>Variations:</strong> Can be stuffed with nuts, coconut, or served with rabri (thickened milk)</li></ul>"
+      "q": "Which planet is known as the Red Planet?",
+      "a": "Mars",
+      "facts": "<h3>Why Mars looks red</h3><ul><li><strong>Rusty dust:</strong> Mars is covered in iron-rich dust that has oxidised, giving the surface a red appearance.</li><li><strong>Thin atmosphere:</strong> Its atmosphere is too thin to hide the surface colour.</li><li><strong>Nicknames:</strong> Because of its colour, many cultures associate Mars with war or fire.</li></ul>"
     },
     {
-      "q": "Which crispy diamond-shaped pastry is traditionally prepared for Diwali?",
-      "a": "Gujiya (or Karanji)",
-      "facts": "<h3>About Gujiya</h3><ul><li><strong>Shape:</strong> Half-moon or diamond-shaped dumpling with decorative crimped edges</li><li><strong>Filling:</strong> Sweet mixture of khoya (milk solids), coconut, nuts, and jaggery or sugar</li><li><strong>Regional Names:</strong> Called Karanji in Maharashtra, Ghughra in Gujarat, and Pedakiya in Odisha</li><li><strong>Preparation:</strong> Made with refined flour dough, filled with sweet mixture, sealed, and deep-fried until golden</li><li><strong>Tradition:</strong> Families gather to make these together, passing down recipes through generations</li></ul>"
+      "q": "What is the largest ocean on Earth?",
+      "a": "The Pacific Ocean",
+      "facts": "<h3>The vast Pacific</h3><ul><li><strong>Sheer size:</strong> It covers more than 30% of the Earth's surface.</li><li><strong>Deepest point:</strong> The Mariana Trench, over 11,000 metres deep, lies in the Pacific.</li><li><strong>Ring of Fire:</strong> Many of the world's volcanoes and earthquakes occur around its edges.</li></ul>"
+    },
+    {
+      "q": "In chess, which piece moves in an L-shape?",
+      "a": "The knight",
+      "facts": "<h3>The tricky knight</h3><ul><li><strong>Unique move:</strong> The knight moves two squares in one direction and then one at a right angle.</li><li><strong>Jumping:</strong> It is the only piece that can jump over other pieces.</li><li><strong>Forks:</strong> Knights are excellent at forking two or more pieces at once.</li></ul>"
     }
   ],
-  "Language": [
+  "Movies": [
     {
-      "q": "What does the word 'Diwali' mean in Sanskrit?",
-      "a": "Row of lights",
-      "facts": "<h3>Etymology of Diwali</h3><ul><li><strong>Sanskrit Origin:</strong> 'Deepavali' combines 'deepa' (lamp/light) and 'avali' (row/series)</li><li><strong>Pronunciation:</strong> 'Diwali' is the shortened Hindi version of 'Deepavali'</li><li><strong>Symbolism:</strong> The row of lights represents the victory of light over darkness, good over evil</li><li><strong>Ancient Texts:</strong> References to lighting lamps for celebrations found in Vedic literature</li><li><strong>Cultural Spread:</strong> The term has been adopted in various forms across different Indian languages and cultures</li></ul>"
+      "q": "Who directed the sci‑fi heist movie <em>Inception</em>?",
+      "a": "Christopher Nolan",
+      "facts": "<h3>Christopher Nolan</h3><ul><li><strong>Mind‑bending style:</strong> Known for complex narratives and practical effects.</li><li><strong>Other hits:</strong> Directed <em>The Dark Knight</em> trilogy, <em>Interstellar</em> and <em>Oppenheimer</em>.</li><li><strong>Sound & visuals:</strong> Often collaborates with composer Hans Zimmer and cinematographer Hoyte van Hoytema.</li></ul>"
     },
     {
-      "q": "In which language is the word 'Deepavali' more commonly used?",
-      "a": "Tamil and other South Indian languages",
-      "facts": "<h3>Regional Language Usage</h3><ul><li><strong>South India:</strong> Tamil, Telugu, Kannada, and Malayalam speakers prefer 'Deepavali'</li><li><strong>North India:</strong> Hindi, Punjabi, and other northern languages commonly use 'Diwali'</li><li><strong>Pronunciation:</strong> South Indians maintain the original Sanskrit pronunciation</li><li><strong>Cultural Context:</strong> Different regions have varying traditions but celebrate the same core themes</li><li><strong>Official Usage:</strong> Government documents often use 'Deepavali' as the formal name</li></ul>"
+      "q": "Which movie popularised the phrase “May the Force be with you”?",
+      "a": "Star Wars",
+      "facts": "<h3>The Force is strong</h3><ul><li><strong>First appearance:</strong> The line was spoken in the 1977 film <em>Star Wars: A New Hope</em>.</li><li><strong>Cultural impact:</strong> It has become a universal way to wish someone good luck.</li><li><strong>May the 4th:</strong> Fans celebrate “Star Wars Day” on May 4th because it sounds like the phrase.</li></ul>"
+    },
+    {
+      "q": "In the Marvel Cinematic Universe, what is the name of Thor’s hammer?",
+      "a": "Mjölnir",
+      "facts": "<h3>Mjölnir</h3><ul><li><strong>Worthiness:</strong> Only those who are deemed worthy can lift the hammer.</li><li><strong>Origins:</strong> Based on the hammer from Norse mythology.</li><li><strong>On screen:</strong> Appears in multiple films, including <em>Thor</em>, <em>The Avengers</em>, and <em>Avengers: Endgame</em>.</li></ul>"
     }
   ],
-  "Gods": [
+  "Music": [
     {
-      "q": "Which goddess of wealth and prosperity is primarily worshipped during Diwali?",
-      "a": "Goddess Lakshmi",
-      "facts": "<h3>About Goddess Lakshmi</h3><ul><li><strong>Significance:</strong> Hindu goddess of wealth, fortune, prosperity, and abundance</li><li><strong>Appearance:</strong> Often depicted sitting on a lotus flower with four arms, holding lotus buds</li><li><strong>Symbols:</strong> Associated with gold coins, elephants, and owl (her vehicle)</li><li><strong>Diwali Connection:</strong> Believed to visit clean, well-lit homes on Diwali night to bless them with prosperity</li><li><strong>Worship Rituals:</strong> People clean their homes, light diyas, and create rangoli patterns to welcome her</li><li><strong>Mantras:</strong> 'Om Shreem Maha Lakshmiyei Namaha' is commonly chanted during prayers</li></ul>"
+      "q": "Which musical instrument has 88 keys on a standard modern version?",
+      "a": "The piano",
+      "facts": "<h3>The modern piano</h3><ul><li><strong>Key count:</strong> 52 white keys and 36 black keys.</li><li><strong>Origins:</strong> Developed from earlier keyboard instruments like the harpsichord.</li><li><strong>Range:</strong> Covers more than seven octaves, making it one of the most versatile instruments.</li></ul>"
     },
     {
-      "q": "Which Hindu god is associated with the removal of obstacles and is often worshipped before Diwali celebrations?",
-      "a": "Lord Ganesha",
-      "facts": "<h3>About Lord Ganesha</h3><ul><li><strong>Role:</strong> Remover of obstacles, patron of arts and sciences, and lord of beginnings</li><li><strong>Appearance:</strong> Elephant-headed deity with a human body, often depicted with four arms</li><li><strong>Symbols:</strong> Mouse as vehicle, modak (sweet) as favorite food, broken tusk, and large belly</li><li><strong>Diwali Significance:</strong> Invoked before starting any celebration or new venture to ensure success</li><li><strong>Worship Order:</strong> Traditionally worshipped before Goddess Lakshmi during Diwali prayers</li><li><strong>Popular Mantra:</strong> 'Ganpati Bappa Morya' and 'Om Gam Ganapataye Namaha'</li></ul>"
-    },
-    {
-      "q": "A god wins immortality for the gods by cheating in a drinking contest. Then he keeps the secret of that drink hidden from mortals.<br><br>A. Greek<br>B. —<br>C. Hindu ✅<br>D. Norse",
-      "a": "Hindu - Vishnu as Mohini",
-      "facts": "<h3>The Churning of the Ocean (Samudra Manthan)</h3><p>In Hindu mythology, the gods and demons churned the ocean to create <strong>amrita</strong>, the nectar of immortality. When it emerged, Vishnu disguised himself as the enchantress <strong>Mohini</strong> to trick the demons and keep it for the gods.</p><ul><li><strong>The Deception:</strong> Vishnu's beautiful form distracted the demons while the gods drank the nectar</li><li><strong>Rahu's Revenge:</strong> One demon discovered the trick and took a sip, but was beheaded — creating the eclipse demons Rahu and Ketu</li><li><strong>Symbolism:</strong> Represents the eternal struggle between good and evil, and divine wisdom over brute force</li></ul>"
-    },
-    {
-      "q": "A craftsman god forges weapons for the gods, is crippled, and tossed from heaven for his looks.<br><br>A. Greek ✅<br>B. —<br>C. Hindu<br>D. Norse",
-      "a": "Greek - Hephaestus",
-      "facts": "<h3>Hephaestus: The Divine Blacksmith</h3><p><strong>Hephaestus</strong>, the Greek god of the forge, was thrown from Mount Olympus for being deformed. Despite that, he crafted Zeus's thunderbolts and Achilles's armor — the only god who worked for a living.</p><ul><li><strong>Divine Craftsman:</strong> Created magnificent palaces, armor, and weapons for gods and heroes</li><li><strong>Double Rejection:</strong> Thrown from Olympus twice — once by Hera for being ugly, once by Zeus for defending her</li><li><strong>Irony:</strong> Despite his appearance, he married Aphrodite, the goddess of beauty</li><li><strong>Legacy:</strong> Represents the dignity of labor and the power of creativity over physical perfection</li></ul>"
-    },
-    {
-      "q": "A storm god loses his hammer and must dress up as a bride to get it back.<br><br>A. Greek<br>B. —<br>C. Hindu<br>D. Norse ✅",
-      "a": "Norse - Thor",
-      "facts": "<h3>Thor's Bridal Disguise</h3><p>When Thor's hammer <strong>Mjölnir</strong> was stolen, Loki dressed him as a bride to trick the giants. The wedding feast ended with Thor snatching back his hammer and smashing everyone — a rare Norse myth played for comedy.</p><ul><li><strong>The Theft:</strong> The giant Thrym stole Mjölnir and demanded Freyja as his bride for its return</li><li><strong>The Disguise:</strong> Thor, dressed in bridal veils, pretended to be Freyja with Loki as his handmaiden</li><li><strong>The Reveal:</strong> At the wedding, when the hammer was brought out to bless the bride, Thor grabbed it and destroyed the giants</li><li><strong>Comedy:</strong> The story shows Norse gods as flawed and humorous, not just fierce warriors</li></ul>"
-    },
-    {
-      "q": "A god born in a cow shed, steals butter, and charms everyone with music.<br><br>A. Greek<br>B. —<br>C. Hindu ✅<br>D. Norse",
-      "a": "Hindu - Krishna",
-      "facts": "<h3>Krishna: The Divine Butter Thief</h3><p><strong>Krishna</strong>, the butter-thief of Hindu lore, grew up in the village of Gokul. His flute-playing mesmerized milkmaids and cows alike — symbolizing divine joy and irresistible love.</p><ul><li><strong>Birth:</strong> Born in prison, raised by foster parents in a pastoral village to escape his evil uncle</li><li><strong>Butter Thief:</strong> As a child, he would sneak into homes to steal butter and yogurt, charming everyone with his mischief</li><li><strong>Divine Flutist:</strong> His enchanting music on the flute represents the call of the divine to the soul</li><li><strong>Symbolism:</strong> Represents divine love (bhakti), playfulness, and the joy of spiritual devotion</li><li><strong>Diwali Connection:</strong> Some regions celebrate Diwali as the day Krishna defeated the demon Narakasura</li></ul>"
-    },
-    {
-      "q": "Twin gods drive the sun and moon across the sky in chariots. They're always racing, never resting.<br><br>A. Greek<br>B. —<br>C. Hindu<br>D. Norse ✅",
-      "a": "Norse - Sol and Mani",
-      "facts": "<h3>The Eternal Chase</h3><p>In Norse myth, <strong>Sol</strong> drives the sun and <strong>Mani</strong> the moon, forever chased by wolves across the sky. When Ragnarok comes, the wolves finally catch them — plunging the world into darkness.</p><ul><li><strong>The Pursuers:</strong> Two wolves, Sköll and Hati, chase the chariots endlessly through the heavens</li><li><strong>Eclipses:</strong> When the wolves get too close, they nearly catch their prey, causing solar and lunar eclipses</li><li><strong>Ragnarok:</strong> At the end of the world, the wolves will finally devour the sun and moon</li><li><strong>Cycle of Time:</strong> Represents the relentless passage of time and the inevitability of fate</li></ul>"
-    },
-    {
-      "q": "A goddess of wisdom is born fully grown from a god's forehead after he swallows her mother.<br><br>A. Greek ✅<br>B. —<br>C. Hindu<br>D. Norse",
-      "a": "Greek - Athena",
-      "facts": "<h3>Athena: Wisdom from the Mind of Zeus</h3><p><strong>Athena</strong> burst from Zeus's forehead in full armor after he swallowed the pregnant goddess Metis. She became the embodiment of logic, craft, and strategy — the mind made divine.</p><ul><li><strong>Unusual Birth:</strong> Zeus swallowed Metis to prevent a prophecy, but Athena emerged from his splitting headache</li><li><strong>Born Armed:</strong> She came out wearing full battle armor, shouting a war cry</li><li><strong>Virgin Goddess:</strong> Remained unmarried, representing pure wisdom and strategic warfare</li><li><strong>Athens' Patron:</strong> Won the city by gifting the olive tree, more valuable than Poseidon's saltwater spring</li><li><strong>Symbols:</strong> Owl (wisdom), olive tree (peace), and aegis (protection)</li></ul>"
-    },
-    {
-      "q": "A god beheads his son and later replaces the head with that of another creature.<br><br>A. Greek<br>B. —<br>C. Hindu ✅<br>D. Norse",
-      "a": "Hindu - Shiva and Ganesha",
-      "facts": "<h3>The Birth of Ganesha's Elephant Head</h3><p>When <strong>Shiva</strong> accidentally killed his son Ganesha, he replaced the boy's head with that of an elephant — granting him wisdom and reverence as the remover of obstacles.</p><ul><li><strong>The Incident:</strong> Ganesha was guarding his mother Parvati's bath when Shiva, unaware of his identity, beheaded him in anger</li><li><strong>The Replacement:</strong> Shiva promised to replace the head with the first creature he found — an elephant</li><li><strong>Divine Blessing:</strong> The elephant head granted Ganesha supreme intelligence and the ability to remove obstacles</li><li><strong>First Worship:</strong> Shiva decreed that Ganesha must be worshipped before any other deity</li><li><strong>Symbolism:</strong> Represents wisdom, new beginnings, and the removal of barriers</li></ul>"
-    },
-    {
-      "q": "A god binds another with unbreakable chains forged by dwarves, as punishment for his mischief.<br><br>A. Greek<br>B. —<br>C. Hindu<br>D. Norse ✅",
-      "a": "Norse - Loki's Binding",
-      "facts": "<h3>Loki's Eternal Punishment</h3><p>After Loki caused the death of Baldr, the gods had him chained with bonds forged by dwarves — a mix of cat's breath, fish's beard, and impossible things. He writhes until the end of days.</p><ul><li><strong>The Crime:</strong> Loki orchestrated the death of the beloved god Baldr through trickery</li><li><strong>Impossible Bonds:</strong> Gleipnir was made from six impossible ingredients, making it unbreakable</li><li><strong>The Torture:</strong> A serpent drips venom on Loki's face; his wife catches it in a bowl, but when she empties it, he writhes in agony</li><li><strong>Earthquakes:</strong> His thrashing causes earthquakes in the mortal world</li><li><strong>Freedom:</strong> He will break free at Ragnarok to lead the forces against the gods</li></ul>"
-    },
-    {
-      "q": "A sea god builds the walls of a city, demands payment, then floods it when cheated.<br><br>A. Greek ✅<br>B. —<br>C. Hindu<br>D. Norse",
-      "a": "Greek - Poseidon and Troy",
-      "facts": "<h3>Poseidon's Revenge on Troy</h3><p><strong>Poseidon</strong> built Troy's walls for King Laomedon, who refused to pay. In revenge, Poseidon sent a sea monster — and that chain of deceit eventually led to the Trojan War.</p><ul><li><strong>The Contract:</strong> Poseidon and Apollo agreed to build Troy's magnificent walls for payment</li><li><strong>The Betrayal:</strong> King Laomedon refused to pay the gods after the work was complete</li><li><strong>Divine Wrath:</strong> Poseidon sent a sea monster that could only be appeased by sacrificing the king's daughter</li><li><strong>Heracles' Role:</strong> The hero saved the princess but was also cheated by Laomedon</li><li><strong>Long-term Curse:</strong> This betrayal cursed Troy, contributing to its eventual destruction in the Trojan War</li></ul>"
-    },
-    {
-      "q": "A goddess once hid inside a giant cow to avoid marriage.<br><br>A. Greek ✅<br>B. —<br>C. Hindu<br>D. Norse",
-      "a": "Greek - Pasiphaë and the Bull",
-      "facts": "<h3>Pasiphaë and the Curse of the Bull</h3><p><strong>Pasiphaë</strong>, cursed with unnatural desire, hid inside a hollow cow made by Daedalus. Her union with a bull gave birth to the Minotaur — one of Greek myth's strangest tragedies.</p><ul><li><strong>The Curse:</strong> Poseidon cursed Pasiphaë with desire for a sacred bull as punishment for her husband's hubris</li><li><strong>Daedalus's Creation:</strong> The master craftsman built a realistic hollow cow for her to hide in</li><li><strong>The Minotaur:</strong> The result was a creature with a bull's head and human body, kept in the Labyrinth</li><li><strong>King Minos's Shame:</strong> The king hid his wife's monstrous child beneath his palace</li><li><strong>Legacy:</strong> Shows how divine curses affect the innocent and create lasting consequences</li></ul>"
-    },
-    {
-      "q": "A god loved knowledge so much he killed himself — and came back smarter.<br><br>A. Greek<br>B. —<br>C. Hindu<br>D. Norse ✅",
-      "a": "Norse - Odin's Sacrifice",
-      "facts": "<h3>Odin's Self-Sacrifice for Wisdom</h3><p><strong>Odin</strong> hung himself from Yggdrasil, the world tree, for nine nights to gain wisdom of the runes. His self-sacrifice made him both god and seeker — wisdom at the price of pain.</p><ul><li><strong>The Hanging:</strong> Odin pierced himself with his own spear and hung from the world tree without food or water</li><li><strong>Nine Nights:</strong> He suffered for nine days and nights, a sacred number in Norse mythology</li><li><strong>The Runes:</strong> At the moment of near-death, he perceived the runes and their magical power</li><li><strong>Other Sacrifices:</strong> He also gave up an eye to drink from the well of wisdom</li><li><strong>The Wanderer:</strong> After this, Odin traveled the world in disguise, constantly seeking more knowledge</li></ul>"
-    },
-    {
-      "q": "A red planet was born from the sweat and blood of a god meditating in fury. It grew up to represent war and energy.<br><br>A. Greek<br>B. Norse<br>C. Hindu ✅",
-      "a": "Hindu - Mangala (Mars)",
-      "facts": "<h3>Mangala: The Warrior Planet</h3><p><strong>Mangala</strong> (Mars) arose from the red sweat of Shiva during deep meditation. He became the fiery god of action and conflict — the celestial spark of courage.</p><ul><li><strong>Birth from Shiva:</strong> Born from drops of sweat that fell from Shiva's forehead during intense meditation</li><li><strong>Red Color:</strong> His red hue represents the fire of energy, passion, and martial spirit</li><li><strong>Vedic Astrology:</strong> Known as Mangala or Kuja, he influences courage, aggression, and vitality</li><li><strong>Tuesday's Lord:</strong> Tuesday (Mangalvar) is dedicated to him in Hindu tradition</li><li><strong>Marriage Compatibility:</strong> In astrology, 'Mangal Dosha' affects marriage compatibility when Mars is poorly positioned</li></ul>"
+      "q": "Which pop star is known as the ‘King of Pop’?",
+      "a": "Michael Jackson",
+      "facts": "<h3>Michael Jackson</h3><ul><li><strong>Iconic albums:</strong> <em>Thriller</em>, <em>Bad</em>, and <em>Off the Wall</em>.</li><li><strong>Record‑breaking:</strong> <em>Thriller</em> is one of the best‑selling albums of all time.</li><li><strong>Signature moves:</strong> Famous for the moonwalk and gravity‑defying lean.</li></ul>"
     }
-  ],
-  "Bollywood Locations": [
   ]
 }

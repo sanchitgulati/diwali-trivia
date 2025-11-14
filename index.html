@@ -3,16 +3,57 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Diwali Trivia Party</title>
+  <title>Trivia Studio</title>
   <style>
     :root{
-      --bg1:#6b1a6b; --bg2:#c92e7d; --fg:#fff7e6; --accent:#ffd000; --accent2:#ff4db8; --accent3:#00d9c8; --danger:#ff4d6d; --shadow:0 10px 30px rgba(0,0,0,.35);
+      --bg1:#fef9c3;
+      --bg2:#a5f3fc;
+      --fg:#020617;
+      --accent:#f97316;
+      --accent2:#ec4899;
+      --accent3:#22c55e;
+      --danger:#f97373;
+      --shadow:8px 8px 0 #020617;
     }
-    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,Noto Sans,"Apple Color Emoji","Segoe UI Emoji";background:radial-gradient(1200px 800px at 20% 0%,var(--bg2),transparent),radial-gradient(1000px 700px at 80% 100%,#8b2c8b,transparent),linear-gradient(135deg,var(--bg1),#4a0e4a 60%);color:var(--fg);display:grid;place-items:center;overflow:hidden;position:relative;}
-    html::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 50%, rgba(255,208,0,0.05) 0%, transparent 50%),radial-gradient(circle at 80% 20%, rgba(255,77,184,0.06) 0%, transparent 50%),radial-gradient(circle at 50% 80%, rgba(0,217,200,0.05) 0%, transparent 50%);animation:shimmer 20s ease-in-out infinite;pointer-events:none;z-index:0;}
-    @keyframes shimmer{0%,100%{opacity:0.3;transform:scale(1) rotate(0deg);}50%{opacity:0.6;transform:scale(1.1) rotate(2deg);}}
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,Noto Sans,"Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(circle at 0 0, var(--bg2) 0, transparent 55%),
+        radial-gradient(circle at 100% 100%, var(--accent2) 0, transparent 55%),
+        linear-gradient(135deg,var(--bg1),var(--bg2));
+      color:var(--fg);
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      position:relative;
+    }
+    html::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background-image:
+        linear-gradient(90deg,rgba(15,23,42,0.06) 1px,transparent 1px),
+        linear-gradient(180deg,rgba(15,23,42,0.06) 1px,transparent 1px);
+      background-size:32px 32px;
+      mix-blend-mode:multiply;
+      pointer-events:none;
+      z-index:0;
+    }
     .wrap{width:min(1600px,95vw);height:min(95vh,900px);position:relative;z-index:1;}
-    .card{position:absolute;inset:0;display:grid;grid-template-rows:auto 1fr auto;gap:1.2rem;background:rgba(255,255,255,0.05);border:6px solid rgba(255,208,0,0.2);border-radius:28px;padding:clamp(16px,3vw,36px);box-shadow:var(--shadow);backdrop-filter:blur(6px);}
+    .card{
+      position:absolute;
+      inset:0;
+      display:grid;
+      grid-template-rows:auto 1fr auto;
+      gap:1.2rem;
+      background:#fefce8;
+      border:4px solid #020617;
+      border-radius:28px;
+      padding:clamp(18px,3vw,38px);
+      box-shadow:var(--shadow);
+    }
     header{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
     .title{display:flex;align-items:center;gap:.6rem;font-weight:900;letter-spacing:.5px;}
     .title .logo{font-size:clamp(24px,4vw,40px);} .title .text{font-size:clamp(20px,2.6vw,34px);}
@@ -23,9 +64,18 @@
     .intro-view{display:none;} .intro-view.show{display:block;animation:fadeIn .5s ease-out;}
     .intro-content{max-width:700px;margin:0 auto;padding:clamp(16px,3vw,32px);}
     .intro-emoji{font-size:clamp(48px,8vw,80px);margin-bottom:clamp(16px,2vh,24px);}
-    .intro-title{font-size:clamp(36px,6vw,64px);font-weight:900;line-height:1.1;margin:0 0 clamp(12px,2vh,20px) 0;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .intro-title{
+      font-size:clamp(36px,6vw,64px);
+      font-weight:900;
+      line-height:1.1;
+      margin:0 0 clamp(12px,2vh,20px) 0;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
     .intro-text{font-size:clamp(18px,2.5vw,26px);margin:0 0 clamp(24px,4vh,40px) 0;opacity:0.95;}
-    .intro-instructions{text-align:left;background:rgba(255,255,255,0.05);border:2px solid rgba(255,208,0,0.15);border-radius:16px;padding:clamp(16px,2vw,24px);margin-bottom:clamp(24px,4vh,40px);}
+    .intro-instructions{text-align:left;background:#ffffff;border:3px solid #020617;border-radius:18px;padding:clamp(16px,2vw,24px);margin-bottom:clamp(24px,4vh,40px);box-shadow:4px 4px 0 #020617;}
     .intro-instructions p{margin:0 0 clamp(8px,1.5vh,12px) 0;font-size:clamp(16px,2vw,20px);font-weight:700;color:var(--accent);}
     .intro-instructions ul{margin:0;padding-left:clamp(20px,3vw,28px);list-style:none;}
     .intro-instructions li{margin-bottom:clamp(6px,1vh,10px);font-size:clamp(14px,1.8vw,18px);line-height:1.5;position:relative;padding-left:clamp(16px,2vw,20px);}
@@ -42,41 +92,47 @@
     .answer-facts ul{margin:clamp(8px,1.5vh,12px) 0;padding-left:clamp(16px,3vw,24px);}
     .answer-facts li{margin-bottom:clamp(6px,1vh,10px);}
     @keyframes slideIn{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
-    footer{display:flex;align-items:center;justify-content:space-between;gap:1rem;} footer.hidden{display:none!important;} .controls{display:flex;flex-wrap:wrap;gap:.5rem;} button.ctrl{font-size:clamp(14px,1.6vw,18px);font-weight:700;color:#0b0814;background:linear-gradient(180deg,var(--accent),#ff9d00);border:none;border-radius:14px;padding:.6em .9em;cursor:pointer;box-shadow:var(--shadow);} button.ctrl.secondary{background:linear-gradient(180deg,#ffe8b5,#ffd270);} button.ctrl.ghost{background:#ffffff10;color:var(--fg);border:2px solid #ffffff30;} button.ctrl:active{transform:translateY(1px);} .idx{font-weight:700;opacity:.9;}
+    footer{display:flex;align-items:center;justify-content:space-between;gap:1rem;} footer.hidden{display:none!important;} .controls{display:flex;flex-wrap:wrap;gap:.5rem;} button.ctrl{font-size:clamp(14px,1.6vw,18px);font-weight:800;color:#020617;background:var(--accent);border-radius:999px;padding:.6em 1.1em;cursor:pointer;box-shadow:4px 4px 0 #020617;border:3px solid #020617;letter-spacing:.03em;text-transform:uppercase;} button.ctrl.secondary{background:var(--accent3);} button.ctrl.ghost{background:#f9fafb;color:var(--fg);border-color:#020617;} button.ctrl:active{transform:translate(2px,2px);box-shadow:2px 2px 0 #020617;} .idx{font-weight:800;opacity:.9;}
     .tips{display:none;}
     .hidden{display:none!important;} .pill{padding:.25em .6em;border-radius:999px;background:#ffffff22;}
-    .modal{position:fixed;inset:0;display:none;place-items:center;background:#000a;z-index:10;} .modal .box{width:min(1200px,92vw);max-height:90vh;overflow:auto;background:#111a;border:2px solid #fff3;padding:1rem;border-radius:18px;} .modal textarea{width:100%;height:50vh;font:14px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#fff;background:#000;border:1px solid #444;border-radius:12px;padding:10px;} .modal .row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem}
+    .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(15,23,42,0.65);z-index:10;} .modal .box{width:min(1200px,92vw);max-height:90vh;overflow:auto;background:#f9fafb;border:3px solid #020617;padding:1rem;border-radius:20px;box-shadow:8px 8px 0 #020617;color:#020617;} .modal textarea{width:100%;height:50vh;font:14px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#020617;background:#e5e7eb;border:2px solid #020617;border-radius:12px;padding:10px;} .modal .row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem}
     .maker-backdrop{position:fixed;inset:0;display:none;place-items:center;background:#000d;z-index:12;}
     .maker-backdrop.show{display:grid;}
-    .maker-dialog{width:min(1400px,96vw);height:min(860px,96vh);background:#12091f;border-radius:24px;box-shadow:var(--shadow);border:2px solid rgba(255,255,255,0.18);display:flex;flex-direction:column;overflow:hidden;}
-    .maker-header{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.2rem;border-bottom:1px solid rgba(255,255,255,0.1);background:linear-gradient(135deg,#7a2fd1,#c92e7d);}
+    .maker-dialog{width:min(1400px,96vw);height:min(860px,96vh);background:#fefce8;border-radius:24px;box-shadow:var(--shadow);border:4px solid #020617;display:flex;flex-direction:column;overflow:hidden;}
+    .maker-header{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.2rem;border-bottom:3px solid #020617;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#020617;}
     .maker-title{font-weight:800;font-size:1.05rem;display:flex;flex-direction:column;gap:.1rem;}
     .maker-title span{font-size:.8rem;opacity:.9;}
     .maker-actions{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:flex-end;}
-    .maker-body{flex:1;display:grid;grid-template-columns:minmax(220px,320px) 1fr;background:radial-gradient(circle at top,#2b1441,#110718);border-top:1px solid rgba(0,0,0,0.7);}
-    .maker-list{border-right:1px solid rgba(255,255,255,0.12);padding:.75rem;overflow:auto;background:linear-gradient(180deg,rgba(0,0,0,0.25),rgba(0,0,0,0.55));}
-    .maker-list-item{padding:.55rem .65rem;border-radius:12px;margin-bottom:.4rem;cursor:pointer;background:rgba(255,255,255,0.04);border:1px solid transparent;display:flex;flex-direction:column;gap:.15rem;font-size:.82rem;transition:background .15s,border-color .15s,transform .1s;}
-    .maker-list-item:hover{background:rgba(255,255,255,0.08);transform:translateY(-1px);}
-    .maker-list-item.active{border-color:var(--accent3);background:rgba(0,217,200,0.14);}
+    .maker-body{flex:1;display:grid;grid-template-columns:minmax(220px,320px) 1fr;background:#facc15;border-top:3px solid #020617;}
+    .maker-list{border-right:3px solid #020617;padding:.75rem;overflow:auto;background:#fde68a;}
+    .maker-list-item{padding:.55rem .65rem;border-radius:12px;margin-bottom:.4rem;cursor:pointer;background:#fefce8;border:2px solid #020617;display:flex;flex-direction:column;gap:.15rem;font-size:.82rem;transition:background .15s,transform .1s;}
+    .maker-list-item:hover{background:#e0f2fe;transform:translateY(-1px);}
+    .maker-list-item.active{background:#a5f3fc;}
     .maker-list-item-title{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
     .maker-list-item-meta{opacity:.8;font-size:.75rem;display:flex;justify-content:space-between;gap:.3rem;}
     .maker-add-btn{width:100%;margin-top:.4rem;border-radius:999px;padding:.55rem .75rem;font-size:.85rem;justify-content:center;display:flex;align-items:center;gap:.3rem;background:linear-gradient(180deg,var(--accent3),#00a9a0);}
     .maker-main{padding:1rem 1.1rem;display:grid;grid-template-rows:auto 1fr;gap:.75rem;overflow:hidden;}
-    .maker-main-header{display:flex;justify-content:space-between;align-items:center;}
+    .maker-main-header{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;}
     .maker-form{display:grid;grid-template-columns:1.35fr 1fr;gap:.9rem;height:100%;}
     .maker-field{display:flex;flex-direction:column;gap:.25rem;font-size:.8rem;}
     .maker-field label{font-weight:600;opacity:.9;}
     .maker-field input,.maker-field textarea{border-radius:10px;border:1px solid rgba(255,255,255,0.18);background:rgba(4,2,15,0.9);color:var(--fg);padding:.45rem .55rem;font-family:inherit;font-size:.85rem;resize:vertical;min-height:2.4rem;}
     .maker-field textarea{min-height:4.4rem;}
-    .maker-preview-card{background:rgba(255,255,255,0.04);border-radius:16px;padding:.75rem .9rem;box-shadow:0 8px 24px rgba(0,0,0,0.45);display:flex;flex-direction:column;gap:.5rem;height:100%;}
+    .maker-preview-card{background:#fefce8;border-radius:16px;padding:.75rem .9rem;box-shadow:6px 6px 0 #020617;border:3px solid #020617;display:flex;flex-direction:column;gap:.5rem;height:100%;}
     .maker-preview-question{font-weight:800;font-size:1rem;}
     .maker-preview-answer{opacity:.9;font-size:.9rem;margin-top:auto;}
     .maker-preview-image{max-width:100%;max-height:220px;border-radius:12px;margin:.35rem 0;object-fit:contain;box-shadow:0 4px 16px rgba(0,0,0,.4);display:none;}
     .maker-tag{display:inline-flex;align-items:center;gap:.25rem;padding:.1rem .5rem;border-radius:999px;background:#ffffff22;font-size:.75rem;width:max-content;}
     .maker-empty{opacity:.8;font-size:.9rem;}
     .maker-footer-note{font-size:.75rem;opacity:.7;margin-top:.45rem;}
-    .maker-chip-row{display:flex;flex-wrap:wrap;gap:.4rem;font-size:.75rem;opacity:.8;}
-    .maker-chip{padding:.1rem .45rem;border-radius:999px;border:1px solid rgba(255,255,255,0.35);}
+    .maker-chip-row{display:flex;flex-wrap:wrap;gap:.4rem;font-size:.75rem;opacity:.9;}
+    .maker-chip{padding:.15rem .55rem;border-radius:999px;border:2px solid #020617;background:#f9fafb;}
+    .maker-mood-controls{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;font-size:.8rem;}
+    .maker-mood-label{font-weight:700;}
+    .maker-mood-btn{border-radius:999px;border:2px solid #020617;background:#e5e7eb;padding:.3rem .75rem;font-size:.78rem;font-weight:700;cursor:pointer;box-shadow:3px 3px 0 #020617;}
+    .maker-mood-btn.active{background:#4ade80;}
+    .maker-mood-swatch{display:inline-flex;align-items:center;gap:.25rem;border-radius:999px;border:2px dashed #020617;padding:.2rem .55rem;background:#fefce8;}
+    .maker-mood-swatch input{border:none;background:transparent;width:2.1rem;height:2.1rem;padding:0;cursor:pointer;}
     .maker-inline-buttons{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.35rem;}
     .maker-danger{background:linear-gradient(180deg,var(--danger),#ff1744);}
     @media (max-width:900px){
@@ -91,7 +147,7 @@
   <div class="wrap">
     <div class="card">
       <header>
-        <div class="title"><div class="logo">🪔</div><div class="text">Diwali Trivia Party</div></div>
+        <div class="title"><div class="logo">🎉</div><div class="text">Trivia Studio</div></div>
         <div class="header-right">
           <div class="subtle">Use <span class="pill">Space</span> to reveal • <span class="pill">←/→</span> to navigate • <span class="pill">F</span> fullscreen</div>
           <button class="ctrl ghost header-maker-btn" id="makerOpenBtn">🛠 Trivia Maker</button>
@@ -100,8 +156,8 @@
       <main class="qa" role="main" aria-live="polite">
         <div class="intro-view" id="introView">
           <div class="intro-content">
-            <div class="intro-emoji">🪔✨</div>
-            <h1 class="intro-title">Welcome to Diwali Trivia!</h1>
+            <div class="intro-emoji">🎲✨</div>
+            <h1 class="intro-title">Welcome to Trivia Studio!</h1>
             
             <button class="ctrl ctrl-large" id="startBtn">🎉 Start Quiz</button>
           </div>
@@ -159,12 +215,26 @@
               <span class="maker-chip">Use line breaks or HTML for options</span>
               <span class="maker-chip">Images are embedded directly into the zip</span>
             </div>
+            <div class="maker-mood-controls">
+              <span class="maker-mood-label">Mood:</span>
+              <button class="maker-mood-btn" data-mood="arcade">Arcade</button>
+              <button class="maker-mood-btn" data-mood="chill">Chill</button>
+              <button class="maker-mood-btn" data-mood="night">Night</button>
+              <label class="maker-mood-swatch">
+                Bg 1
+                <input type="color" id="makerBg1Input" />
+              </label>
+              <label class="maker-mood-swatch">
+                Bg 2
+                <input type="color" id="makerBg2Input" />
+              </label>
+            </div>
           </div>
           <div class="maker-form" id="makerForm">
             <div>
               <div class="maker-field">
                 <label for="makerCategoryInput">Category</label>
-                <input id="makerCategoryInput" placeholder="e.g. Food, Gods, Language" />
+                <input id="makerCategoryInput" placeholder="e.g. General, Movies, Science" />
               </div>
               <div class="maker-field">
                 <label for="makerQuestionInput">Question</label>
@@ -201,9 +271,104 @@
       </div>
     </div>
   </div>
-  <div class="modal" id="modal"><div class="box"><h2 style="margin:0 0 .5rem 0">Edit Questions (JSON)</h2>        <p style="margin:.2rem 0 .8rem 0;opacity:.9">Paste an object with categories like <code>{"Food": [{"q":"Question","a":"Answer","facts":"HTML content with facts"}], "Gods": [...]}</code>. Your list is saved to <b>localStorage</b> only on this device.</p><textarea id="jsonArea"></textarea><div class="row"><button class="ctrl" id="saveJson">💾 Save</button><button class="ctrl ghost" id="closeJson">Close</button><input type="file" accept="application/json" id="fileInput" class="hidden" /><button class="ctrl secondary" id="loadFile">📁 Load .json file</button></div></div></div>
+  <div class="modal" id="modal"><div class="box"><h2 style="margin:0 0 .5rem 0">Edit Questions (JSON)</h2>        <p style="margin:.2rem 0 .8rem 0;opacity:.9">Paste an object with categories like <code>{"General": [{"q":"Question","a":"Answer","facts":"HTML content with facts"}], "Movies": [...]}</code>. Your list is saved to <b>localStorage</b> only on this device.</p><textarea id="jsonArea"></textarea><div class="row"><button class="ctrl" id="saveJson">💾 Save</button><button class="ctrl ghost" id="closeJson">Close</button><input type="file" accept="application/json" id="fileInput" class="hidden" /><button class="ctrl secondary" id="loadFile">📁 Load .json file</button></div></div></div>
   <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
   <script>
+    const DEFAULT_THEME = {
+      mood: 'arcade',
+      bg1: '#fef9c3',
+      bg2: '#a5f3fc',
+      fg: '#020617',
+      accent: '#f97316',
+      accent2: '#ec4899',
+      accent3: '#22c55e',
+      danger: '#f97373'
+    };
+
+    const MOOD_PRESETS = {
+      arcade: {
+        mood: 'arcade',
+        bg1: '#fef9c3',
+        bg2: '#a5f3fc',
+        fg: '#020617',
+        accent: '#f97316',
+        accent2: '#ec4899',
+        accent3: '#22c55e',
+        danger: '#f97373'
+      },
+      chill: {
+        mood: 'chill',
+        bg1: '#e0f2fe',
+        bg2: '#bbf7d0',
+        fg: '#0f172a',
+        accent: '#0ea5e9',
+        accent2: '#22c55e',
+        accent3: '#6366f1',
+        danger: '#f97373'
+      },
+      night: {
+        mood: 'night',
+        bg1: '#020617',
+        bg2: '#1e293b',
+        fg: '#e5e7eb',
+        accent: '#a855f7',
+        accent2: '#22d3ee',
+        accent3: '#facc15',
+        danger: '#fb7185'
+      }
+    };
+
+    const LS_THEME_KEY = 'trivia_theme_v1';
+
+    function normalizeTheme(theme) {
+      const base = { ...DEFAULT_THEME };
+      if (!theme || typeof theme !== 'object') return base;
+      const out = { ...base };
+      ['bg1','bg2','fg','accent','accent2','accent3','danger','mood'].forEach(key => {
+        if (typeof theme[key] === 'string' && theme[key].trim()) {
+          out[key] = theme[key].trim();
+        }
+      });
+      if (out.mood && MOOD_PRESETS[out.mood]) {
+        return { ...MOOD_PRESETS[out.mood], ...out };
+      }
+      return out;
+    }
+
+    function loadTheme() {
+      try {
+        const raw = localStorage.getItem(LS_THEME_KEY);
+        if (raw) {
+          return normalizeTheme(JSON.parse(raw));
+        }
+      } catch (err) {
+        console.warn('Ignoring invalid saved theme', err);
+      }
+      return { ...DEFAULT_THEME };
+    }
+
+    function saveTheme(theme) {
+      try {
+        localStorage.setItem(LS_THEME_KEY, JSON.stringify(theme));
+      } catch (err) {
+        console.warn('Could not save theme', err);
+      }
+    }
+
+    function applyTheme(theme) {
+      const t = normalizeTheme(theme);
+      const root = document.documentElement;
+      root.style.setProperty('--bg1', t.bg1);
+      root.style.setProperty('--bg2', t.bg2);
+      root.style.setProperty('--fg', t.fg);
+      root.style.setProperty('--accent', t.accent);
+      root.style.setProperty('--accent2', t.accent2);
+      root.style.setProperty('--accent3', t.accent3);
+      root.style.setProperty('--danger', t.danger);
+      root.style.setProperty('--shadow', '8px 8px 0 #020617');
+      return t;
+    }
+
     let DEFAULT_QA = null;
     
     // Load questions from external JSON file
@@ -219,11 +384,16 @@
         console.error('Error loading questions:', error);
         // Fallback to minimal inline questions if external file fails
         DEFAULT_QA = {
-          "Food": [{q:"What sweet treat is popular during Diwali?",a:"Gulab Jamun",facts:"<p>Sweet milk-based dessert.</p>"}],
-          "Language": [{q:"What does 'Diwali' mean?",a:"Row of lights",facts:"<p>From Sanskrit deepavali.</p>"}],
-          "Gods": [{q:"Which goddess is worshipped during Diwali?",a:"Goddess Lakshmi",facts:"<p>Goddess of wealth and prosperity.</p>"}]
+          "General": [
+            {q:"Which planet is known as the Red Planet?",a:"Mars",facts:"<p>Mars appears red because of iron oxide (rust) on its surface.</p>"},
+            {q:"What is the largest ocean on Earth?",a:"The Pacific Ocean",facts:"<p>The Pacific covers more than 30% of the Earth's surface.</p>"}
+          ],
+          "Movies": [
+            {q:"Who directed the movie <em>Inception</em>?",a:"Christopher Nolan",facts:"<p>Nolan is also known for <em>The Dark Knight</em> trilogy and <em>Interstellar</em>.</p>"},
+            {q:"Which movie popularized the phrase “May the Force be with you”?",a:"Star Wars",facts:"<p>The line became iconic after the original 1977 film.</p>"}
+          ]
         };
-        console.warn('Using fallback questions');
+        console.warn('Using fallback sample questions');
         initializeApp();
       }
     }
@@ -293,7 +463,11 @@
       const makerResetBtn = document.getElementById('makerResetBtn');
       const makerForm = document.getElementById('makerForm');
       const makerEmpty = document.getElementById('makerEmpty');
+      const makerBg1Input = document.getElementById('makerBg1Input');
+      const makerBg2Input = document.getElementById('makerBg2Input');
+      const makerMoodButtons = Array.from(document.querySelectorAll('.maker-mood-btn'));
 
+      let theme = applyTheme(loadTheme());
       let makerQuestions = [];
       let makerSelectedId = null;
 
@@ -334,6 +508,17 @@
           if (file) importZipPack(file);
           e.target.value = '';
         };
+      }
+
+      if (makerBg1Input) makerBg1Input.addEventListener('input', () => setCustomBackground());
+      if (makerBg2Input) makerBg2Input.addEventListener('input', () => setCustomBackground());
+      if (makerMoodButtons.length) {
+        makerMoodButtons.forEach(btn => {
+          btn.onclick = () => {
+            const moodId = btn.dataset.mood;
+            if (moodId) setMood(moodId);
+          };
+        });
       }
 
       if (makerCategoryInput) makerCategoryInput.addEventListener('input', syncMakerFormToState);
@@ -656,6 +841,7 @@
         if (!makerOverlay) return;
         makerOverlay.classList.add('show');
         renderMakerUI();
+        updateMoodControls();
       }
 
       function closeMaker() {
@@ -807,6 +993,35 @@
         renderMakerUI();
       }
 
+      function updateMoodControls() {
+        if (makerBg1Input) makerBg1Input.value = theme.bg1;
+        if (makerBg2Input) makerBg2Input.value = theme.bg2;
+        if (makerMoodButtons && makerMoodButtons.length) {
+          makerMoodButtons.forEach(btn => {
+            const moodId = btn.dataset.mood;
+            btn.classList.toggle('active', !!moodId && moodId === theme.mood);
+          });
+        }
+      }
+
+      function setMood(moodId) {
+        if (!moodId || !MOOD_PRESETS[moodId]) return;
+        theme = { ...MOOD_PRESETS[moodId] };
+        theme.mood = moodId;
+        applyTheme(theme);
+        saveTheme(theme);
+        updateMoodControls();
+      }
+
+      function setCustomBackground() {
+        const bg1 = makerBg1Input ? makerBg1Input.value || theme.bg1 : theme.bg1;
+        const bg2 = makerBg2Input ? makerBg2Input.value || theme.bg2 : theme.bg2;
+        theme = normalizeTheme({ ...theme, bg1, bg2, mood: 'custom' });
+        applyTheme(theme);
+        saveTheme(theme);
+        updateMoodControls();
+      }
+
       function buildQAFromMaker() {
         const raw = {};
         makerQuestions.forEach(qItem => {
@@ -849,7 +1064,7 @@
           const url = URL.createObjectURL(blob);
           const a = document.createElement('a');
           a.href = url;
-          a.download = 'diwali-trivia-pack.zip';
+          a.download = 'trivia-pack.zip';
           a.click();
           URL.revokeObjectURL(url);
         } catch (err) {
@@ -887,7 +1102,7 @@
       }
 
       function resetToDefaults() {
-        if (!confirm('Reset to the original Diwali trivia pack?')) return;
+        if (!confirm('Reset to the original sample trivia pack?')) return;
         try {
           qaData = normalizeQA(DEFAULT_QA);
           qa = flattenQA(qaData);
